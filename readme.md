@@ -32,39 +32,39 @@ The benchmark test problems are specified in `./motif_specs.csv`,
 and repeated below with a brief description and references for their provenances.
 
 
-| PDB  | Motif Residues | Redesigned Positions | Description |
-| ---- | -------------- | -------------------- | ----------- |
-| 1BCF | A18-25;A47-54;A92-99;A123-130 | A19-25;A47-50;A52-53;A92-93;A95-99;A123-126;A128-129 | Di-iron binding motif [1] |
-| 5TPN | A163-181 | A163-168;A170-171;A179 | RSV F-protein Site V [1] |
-| 5IUS | A119-140;A63-82 | A63;A65;A67;A69;A71-72;A76;A79-80;A82;A119-123;A125;A127;A129-130;A133;A135;A137-138;A140 | PD-L1 binding interface on PD-1 [1] |
-| 3IXT | P254-277 | P255;P258-259;P262-263;P268;P271-272;P275-276 | RSV F-protein Site II [2] |
-| 5YUI | A93-97;A118-120;A198-200 | A93;A95;A97;A118;A120 | Carbonic anhydrase active site [1] |
-| 1YCR | B19-27 | B20-22;B24-25 | P53 helix that binds to Mdm2 [1] |
-| 2KL8 | A1-7;A28-79 | | De novo designed protein [1] |
-| 7MRX | B25-46 | B25-46 | Barnase ribonuclease inhibitor [3] |
-| 4JHW | F63-69;F196-212 | F63;F69;F196;F198;F203;F211-212 | RSV F-protein Site 0 [4] |
-| 4ZYP | A422-436 | A422-427;A430-431;A433-43 | RSV F-protein Site 4 [4] |
-| 5WN9 | A170-189 | A170-175;A188-189 | RSV G-protein 2D10 site [2] |
-| 5TRV | A45-65 | A45-65 | De novo designed protein [5] |
-| 6E6R | A23-35 | A23-35 | Ferridoxin Protein [5] |
-| 6EXZ | A556-570 | A556-570 | RNA export factor [5] |
-| 7A8S | A41-55;A72-86 |  | Orphan protein [6] |
-| 7AD5 | A99-113 |  | Orphan protein [6] |
-| 7AHO | A199-213 |  | Orphan protein [6] |
-| 7BNY | A83-97;A111-125 |  | Orphan protein [6] |
-| 7CG5 | A95-109 |  | Orphan protein [6] |
-| 7DGW | A22-36;A70-84 |  | Orphan protein [6] |
-| 7KUW | A2-16;A30-44 |  | Orphan protein [6] |
-| 7KWW | B14-28 |  | Orphan protein [6] |
-| 7MQQ | A80-94;A115-129 |  | Orphan protein [6] |
-| 7S5L | A27-41;A77-91 |  | Orphan protein [6] |
-| 7WRK | A80-94 |  | Orphan protein [6] |
-| 6CPA | A69-72;A127;A196;A248;A270 | A70-71 | Carboxypeptidase active site  [7] |
-| 1MPY | A153;A199;A214;A246;A255;A265 |  | catechol deoxygenase active site [7] |
-| 1B73 | A7-8;A70;A178-180 | A179 | Glutamate racemase active site [7] |
-| 2RKX | A9-11;A48-50;A101;A128;A169;A176;A201;A222-224 | A10;A49;A223 | De novo designed Kemp eliminase [8] |
-| 3B5V | A51-53;A81;A110;A131;A159;A180-184;A210-211;A231-233 | A52;A181;A183;A232 | De novo designed retro-aldol enzyme [9]  |
-| 4XOJ | A55;A99;A190-192 | A191 | Trypsin catalytic triad and oxyanion hole [10] |
+| #  | PDB  | Motif Residues | Redesigned Positions | Description |
+| -- | ---- | -------------- | -------------------- | ----------- |
+| 1  | 1BCF | A18-25;A47-54;A92-99;A123-130 | A19-25;A47-50;A52-53;A92-93;A95-99;A123-126;A128-129 | Di-iron binding motif [1] |
+| 2  | 5TPN | A163-181 | A163-168;A170-171;A179 | RSV F-protein Site V [1] |
+| 3  | 5IUS | A119-140;A63-82 | A63;A65;A67;A69;A71-72;A76;A79-80;A82;A119-123;A125;A127;A129-130;A133;A135;A137-138;A140 | PD-L1 binding interface on PD-1 [1] |
+| 4  | 3IXT | P254-277 | P255;P258-259;P262-263;P268;P271-272;P275-276 | RSV F-protein Site II [2] |
+| 5  | 5YUI | A93-97;A118-120;A198-200 | A93;A95;A97;A118;A120 | Carbonic anhydrase active site [1] |
+| 6  | 1YCR | B19-27 | B20-22;B24-25 | P53 helix that binds to Mdm2 [1] |
+| 7  | 2KL8 | A1-7;A28-79 | | De novo designed protein [1] |
+| 8  | 7MRX | B25-46 | B25-46 | Barnase ribonuclease inhibitor [3] |
+| 9  | 4JHW | F63-69;F196-212 | F63;F69;F196;F198;F203;F211-212 | RSV F-protein Site 0 [4] |
+| 10  | 4ZYP | A422-436 | A422-427;A430-431;A433-43 | RSV F-protein Site 4 [4] |
+| 11  | 5WN9 | A170-189 | A170-175;A188-189 | RSV G-protein 2D10 site [2] |
+| 12  | 5TRV | A45-65 | A45-65 | De novo designed protein [5] |
+| 13  | 6E6R | A23-35 | A23-35 | Ferridoxin Protein [5] |
+| 14  | 6EXZ | A556-570 | A556-570 | RNA export factor [5] |
+| 15  | 7A8S | A41-55;A72-86 |  | Orphan protein [6] |
+| 16  | 7AD5 | A99-113 |  | Orphan protein [6] |
+| 17  | 7AHO | A199-213 |  | Orphan protein [6] |
+| 18  | 7BNY | A83-97;A111-125 |  | Orphan protein [6] |
+| 19  | 7CG5 | A95-109 |  | Orphan protein [6] |
+| 20  | 7DGW | A22-36;A70-84 |  | Orphan protein [6] |
+| 21  | 7KUW | A2-16;A30-44 |  | Orphan protein [6] |
+| 22  | 7KWW | B14-28 |  | Orphan protein [6] |
+| 23  | 7MQQ | A80-94;A115-129 |  | Orphan protein [6] |
+| 24  | 7S5L | A27-41;A77-91 |  | Orphan protein [6] |
+| 25  | 7WRK | A80-94 |  | Orphan protein [6] |
+| 26  | 6CPA | A69-72;A127;A196;A248;A270 | A70-71 | Carboxypeptidase active site  [7] |
+| 27  | 1MPY | A153;A199;A214;A246;A255;A265 |  | catechol deoxygenase active site [7] |
+| 28  | 1B73 | A7-8;A70;A178-180 | A179 | Glutamate racemase active site [7] |
+| 29  | 2RKX | A9-11;A48-50;A101;A128;A169;A176;A201;A222-224 | A10;A49;A223 | De novo designed Kemp eliminase [8] |
+| 30  | 3B5V | A51-53;A81;A110;A131;A159;A180-184;A210-211;A231-233 | A52;A181;A183;A232 | De novo designed retro-aldol enzyme [9]  |
+| 31  | 4XOJ | A55;A99;A190-192 | A191 | Trypsin catalytic triad and oxyanion hole [10] |
 
 The last six problems (6CPA, 1MPY,  1B73,  2RKX,  3B5V, and 4XOJ) are enzyme active sites extracted from various sources detailed in `test_case_sources/other_enzymes/`.
 
