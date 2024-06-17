@@ -8,29 +8,28 @@ parses a motif specification into a standardized format for motif-scaffolding me
 A motif present in an existing structure may be specified by a comma-separated string with:
 1. The PDB id of the protein from which the motif is obtained.
 2. The chain and residue indices of the amino acids comprising the motif.  Contiguous segments of residues are concatenated into a list separated by semi-colons.
-3. The chain and residue indices of residues whose amino acid identity may be redesigned.
+3. The chain and indices of residues whose amino acid identity may be redesigned.
 
 
 
 ### Examples
-* ``7F7P,B32-46;A7-21,B32-46;A7-21'' --> two segments of motif. Residues 32 through 46 on chain B and residues 7 through 21 on chain A.  All positions may be redesigned.
+* `7F7P,B32-46;A7-21,B32-46;A7-21` --> two segments of motif. Residues 32 through 46 on chain B and residues 7 through 21 on chain A.  All positions may be redesigned.
 
-* ``4xoj,A55;A99;A190-192,A191'' --> three segments of motif.  All on chain A.  Residues 55, 99, 190, 191, and 192.  Only residue 191 may be redesigned.
+* `4xoj,A55;A99;A190-192,A191` --> three segments of motif.  All segments are on chain A.  Residues 55, 99, 190, 191, and 192.  Only residue 191 may be redesigned.
 
 ### Motif-file specification
 `./parsing/motif_load_and_parse.ipynb` parses the motif problem specifications 
 writes out target motifs as `.pdb` files to be used as input for motif scaffolding methods.
 In these files:
-* Each segment of the motif is labeled as its own chain (i.e. `A`, `B`, `C`, etc).
-* For residues for which the amino acide type may be redesigned, all atoms other than N, CA, C, and O are removed and the residue type is set to UNK.  Side-chain heavy atoms are included for other residues.
-* The header of the motif includes a contig specifying how the motif is placed in the native scaffold. This header can provide guidance for methods that require the length of a scaffold and the order and placement of the motif to be specified. However this these aspects of a solution may also be chosen by a method.
-  * Example: for motif specification `4xoj,A55;A99;A190-192,A191` the header contig should be "38;A;43;B;90;C;46"
-  * 4xoj has 223 resolved residues (indexed as 16 through 238), the 38 corresponds to the 38 residues (16-54) before residue 55 (segment A), the 43 corresponds to the residues between residue 55 and 99 and so on. The final 46 indicates that the native structure terminates with 46 additional residues that are not part of the motif.
+* Each segment of the motif is labeled as its own chain (i.e. A, B, C, etc).
+* For residues for which the amino acide type may be redesigned, all atoms other than N, CA, C, and O are removed and the residue type is set to unknown (`UNK`).  Side-chain heavy atoms are included for other residues.
+* The header of the motif includes a contig specifying how the motif is placed in the native scaffold. This header can provide guidance for methods that require the length of a scaffold and the order and placement of the motif to be specified. However this aspect of a solution may also be chosen (even dynamically) in a problem-specific manner.
+  * Example: for motif specification `4xoj,A55;A99;A190-192,A191` the header contig is `38;A;43;B;90;C;46`. This obtains because 4xoj has 223 resolved residues (indexed as 16 through 238), the 38 corresponds to the 38 residues (16-54) before residue 55 (segment A), the 43 corresponds to the residues between residue 55 and 99 and so on. The final 46 indicates that the native structure terminates with 46 additional residues that are not part of the motif.
 
 
 ## Benchmark test cases
 The benchmark test problems are specified in `./motif_specs.csv`,
-and repeated below with a brief discription and references for their provenance.
+and repeated below with a brief description and references for their provenances.
 
 
 | PDB  | Motif Residues | Redesigned Positions | Description |
