@@ -65,7 +65,13 @@ and repeated below with a brief description and references for their provenances
 | 29  | 2RKX | A9-11;A48-50;A101;A128;A169;A176;A201;A222-224 | A10;A49;A223 | De novo designed Kemp eliminase [8] |
 | 30  | 3B5V | A51-53;A81;A110;A131;A159;A180-184;A210-211;A231-233 | A52;A181;A183;A232 | De novo designed retro-aldol enzyme [9]  |
 | 31  | 4XOJ | A55;A99;A190-192 | A191 | Trypsin catalytic triad and oxyanion hole [10] |
-
+| 32  | 1QY3 | A58-71;A96;A222  | A62;A65-67;A96;A222 | GFP pre-cyclized state (** must restore residue 96 to Arg rather than keep inactive R96A mutation ** ) [11] |
+| 33  | 1LDB | A186-206 |  | Lactate dehydrogenase  [11] | 
+| 34  | 1ITU | A124-147 | | Renal dipeptidase  [11] |
+| 35  | 1YOV | B213-223 | |  Ubiquitin-activating enzyme E1C binding  [11] |
+| 36  | 1A41 | A248-280 | | DNA topoisomerase  [11] |
+| 37  | 1LCC | A1-52 | | DNA-binding helix-turn-helix  [11] |
+| 38  | 5ze9 | A229-243,| P-loop  [11] |
 The last six problems (6CPA, 1MPY,  1B73,  2RKX,  3B5V, and 4XOJ) are enzyme active sites extracted from various sources detailed in `test_case_sources/other_enzymes/`.
 
 ### References:
@@ -79,3 +85,4 @@ The last six problems (6CPA, 1MPY,  1B73,  2RKX,  3B5V, and 4XOJ) are enzyme act
 * [8] https://www.nature.com/articles/nature06879 
 * [9] https://pubmed.ncbi.nlm.nih.gov/18323453/
 * [10] https://www.biorxiv.org/content/10.1101/2024.02.28.582624v2
+* [11] https://www.evolutionaryscale.ai/papers/esm3-simulating-500-million-years-of-evolution-with-a-language-model
