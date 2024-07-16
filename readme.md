@@ -71,7 +71,7 @@ and repeated below with a brief description and references for their provenances
 | 35  | 1YOV | B213-223 | |  Ubiquitin-activating enzyme E1C binding  [11] |
 | 36  | 1A41 | A248-280 | | DNA topoisomerase  [11] |
 | 37  | 1LCC | A1-52 | | DNA-binding helix-turn-helix  [11] |
-| 38  | 5ze9 | A229-243,| P-loop  [11] |
+| 38  | 5ze9 | A229-243| | P-loop  [11] |
 
 The last six problems (6CPA, 1MPY,  1B73,  2RKX,  3B5V, and 4XOJ) are enzyme active sites extracted from various sources detailed in `test_case_sources/other_enzymes/`.
 
