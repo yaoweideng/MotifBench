@@ -19,3 +19,6 @@ conda install -c conda-forge -c bioconda foldseek
 ### TODO:
 * Test time for querying for estimate to put into write-up.
 * Check that faster with list of query pdb files.
+
+
+Observation: in a test of comparing the original TMAlign tmscore implementation to the TMscore returned by foldseek, on the case tested the Foldseek TMscore was 0.844 but the TMalign score was 0.808 (so inflated by 0.036).  This may be significant and worth discussion...
