@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /projects/m000018/docker/
+python3 /users/btrippe/projects/motif_scaffolding_benchmark/RFDiffusion_baseline//run_inference.py inference.output_prefix=/projects/m000018/projects/RFDiffusion_benchmarking/test4/24_6CPA/24_6CPA inference.input_pdb=/users/btrippe/projects/motif_scaffolding_benchmark/motif_pdbs//24_6CPA.pdb contigmap.contigs=[0-20/A1-4/30-55/B1-1/50-70/C1-1/40-55/D1-1/20-25/E1-1/0-20] contigmap.length=200-200 inference.num_designs=100 inference.model_directory_path=/users/btrippe/projects/motif_scaffolding_benchmark/RFDiffusion_baseline/RFdiffusion/models/ inference.write_trajectory=False >/projects/m000018/projects/RFDiffusion_benchmarking/logs/test4//24_6CPA.out 2>/projects/m000018/projects/RFDiffusion_benchmarking/logs/test4//24_6CPA.err &
