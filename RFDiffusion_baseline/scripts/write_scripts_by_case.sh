@@ -1,6 +1,6 @@
 #!/bin/bash
 path=/users/btrippe/projects/motif_scaffolding_benchmark/RFDiffusion_baseline/
-scripts_dir=$path/scripts/run_scripts2/
+scripts_dir=$path/scripts/run_scripts/
 motif_dir=/users/btrippe/projects/motif_scaffolding_benchmark/motif_pdbs/
 csv_path=$path/motif_specs_with_contigs_for_motif_files.csv
 model_dir=/users/btrippe/projects/motif_scaffolding_benchmark/RFDiffusion_baseline/RFdiffusion/models/

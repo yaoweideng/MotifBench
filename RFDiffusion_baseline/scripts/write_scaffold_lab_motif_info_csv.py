@@ -1,0 +1,126 @@
+import sys
+import os
+import re
+import csv
+from Bio.PDB import PDBParser
+
+def parse_pdb_name(filename):
+    match = re.match(r"(.+)_(\d+)\.pdb", filename)
+    if match:
+        return match.group(1), int(match.group(2))
+    return None, None
+
+def extract_contig_and_redesign_positions(pdb_file):
+    parser = PDBParser(QUIET=True)
+    structure = parser.get_structure("structure", pdb_file)
+    
+    contig = []
+    redesign_positions = []
+    current_zero_count = 0
+    non_zero_segments = []
+    chain_residues = {}
+    
+    for chain in structure.get_chains():
+        current_segment = []
+        current_zero_count = 0
+        in_non_zero_segment = False
+        
+        for res in chain.get_residues():
+            bfactor = res["CA"].get_bfactor() if "CA" in res else 0
+            res_id = res.get_id()[1]
+            res_name = res.get_resname()
+            
+            # Determine if B-factor is zero or non-zero
+            if bfactor == 0:
+                if in_non_zero_segment:
+                    # End of a non-zero segment
+                    chain_id = current_segment[0][0]
+                    start = current_segment[0][1]
+                    end = current_segment[-1][1]
+                    non_zero_segments.append(current_segment)
+                    contig.append(f"{chain_id}{start}-{end}")
+                    current_segment = []
+                    in_non_zero_segment = False
+                current_zero_count += 1
+            else:
+                if not in_non_zero_segment:
+                    # End of a zero segment
+                    if current_zero_count:
+                        contig.append(str(current_zero_count))
+                    current_zero_count = 0
+                    in_non_zero_segment = True
+                current_segment.append((chain.id, res_id))
+            
+            # Check for "UNK" residues for redesign positions
+            if res_name == "UNK":
+                chain_residues.setdefault(chain.id, []).append(res_id)
+        
+        # Append any remaining non-zero or zero segment after last residue
+        if current_segment:
+            chain_id = current_segment[0][0]
+            start = current_segment[0][1]
+            end = current_segment[-1][1]
+            non_zero_segments.append(current_segment)
+            contig.append(f"{chain_id}{start}-{end}")
+        if current_zero_count:
+            contig.append(str(current_zero_count))
+    
+    # Format the non-zero segments for contig, ensuring single residues are formatted as "A1-1"
+    #for segment in non_zero_segments:
+    #    chain_id = segment[0][0]
+    #    start = segment[0][1]
+    #    end = segment[-1][1]
+    #    contig.append(f"{chain_id}{start}-{end}")
+    
+    contig_str = "/".join(contig)
+    
+    # Format the redesign positions string
+    redesign_positions_str = []
+    for chain, residues in chain_residues.items():
+        residues.sort()
+        ranges = []
+        start = residues[0]
+        for i in range(1, len(residues)):
+            if residues[i] != residues[i - 1] + 1:
+                if start == residues[i - 1]:
+                    ranges.append(f"{chain}{start}")
+                else:
+                    ranges.append(f"{chain}{start}-{residues[i - 1]}")
+                start = residues[i]
+        # Append the last range
+        if start == residues[-1]:
+            ranges.append(f"{chain}{start}")
+        else:
+            ranges.append(f"{chain}{start}-{residues[-1]}")
+        redesign_positions_str.extend(ranges)
+    
+    return contig_str, ";".join(redesign_positions_str)
+
+def main(input_dir, output_csv):
+    with open(output_csv, 'w', newline='') as csvfile:
+        fieldnames = ["pdb_name", "sample_num", "contig", "redesign_positions"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=',')
+        writer.writeheader()
+        
+        for filename in os.listdir(input_dir):
+            if filename.endswith(".pdb"):
+                pdb_name, sample_num = parse_pdb_name(filename)
+                if pdb_name is not None and sample_num is not None:
+                    pdb_file = os.path.join(input_dir, filename)
+                    contig, redesign_positions = extract_contig_and_redesign_positions(pdb_file)
+                    writer.writerow({
+                        "pdb_name": pdb_name,
+                        "sample_num": sample_num,
+                        "contig": contig,
+                        "redesign_positions": redesign_positions
+                    })
+
+if __name__ == "__main__":
+    if not len(sys.argv) == 3:
+        print("python write_scaffold_lab_motif_info_csv.py <path_to_rfdiffusion_outputs> <path_to_motif_csv_file>")
+        sys.exit(1)
+
+    input_directory = sys.argv[1]
+    output_file = sys.argv[2]
+    main(input_directory, output_file)
+
