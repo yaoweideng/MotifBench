@@ -32,6 +32,7 @@ SOURCE  17 ORGANISM_TAXID: 9606
 KEYWDS    FUSION PROTEIN, RESPIRATORY SYNCYTIAL VIRUS, ANTIBODY, IMMUNE SYSTEM  
 EXPDTA    X-RAY DIFFRACTION                                                     
 AUTHOR    J.J.MOUSA,J.E.CROWE                                                   
+REVDAT   3   16-OCT-24 5TPN    1       REMARK                                   
 REVDAT   2   04-OCT-23 5TPN    1       REMARK                                   
 REVDAT   1   01-FEB-17 5TPN    0                                                
 JRNL        AUTH   J.J.MOUSA,J.E.CROWE                                          

@@ -41,6 +41,7 @@ SOURCE  21 EXPRESSION_SYSTEM_TAXID: 9606
 KEYWDS    RECEPTOR COMPLEX, IL-17E, IL-25, IL-17RB, IL-17RA, CYTOKINE           
 EXPDTA    ELECTRON MICROSCOPY                                                   
 AUTHOR    S.C.WILSON,N.A.CAVENEY,K.M.JUDE,K.C.GARCIA                            
+REVDAT   5   30-OCT-24 7UWL    1       REMARK                                   
 REVDAT   4   28-SEP-22 7UWL    1       JRNL                                     
 REVDAT   3   07-SEP-22 7UWL    1       JRNL                                     
 REVDAT   2   03-AUG-22 7UWL    1       JRNL                                     

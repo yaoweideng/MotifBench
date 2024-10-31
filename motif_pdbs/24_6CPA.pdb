@@ -1,6 +1,6 @@
 REMARK 1 Original PDB ID: 6CPA
 REMARK 2 Contig: 68;A;54;B;68;C;51;D;21;E;37
-REMARK 3 Total Length: 150
+REMARK 3 Total Length: 200
 ATOM      1  N   HIS A   1      -5.443  -0.144  -1.167  1.00  6.16           N  
 ATOM      2  CA  HIS A   1      -4.838  -1.373  -0.654  1.00  6.32           C  
 ATOM      3  C   HIS A   1      -5.549  -1.703   0.675  1.00  7.80           C  

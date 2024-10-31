@@ -1,6 +1,6 @@
 REMARK 1 Original PDB ID: 2RKX
 REMARK 2 Contig: 8;A;36;B;50;C;26;D;40;E;6;F;24;G;20;H;26
-REMARK 3 Total Length: 200
+REMARK 3 Total Length: 225
 ATOM      1  N   ALA A   1       0.136   2.217   5.857  1.00 26.20           N  
 ATOM      2  CA  ALA A   1       0.879   1.348   4.975  1.00 26.04           C  
 ATOM      3  C   ALA A   1       2.381   1.542   5.187  1.00 27.76           C  
