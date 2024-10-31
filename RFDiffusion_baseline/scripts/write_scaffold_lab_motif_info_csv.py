@@ -65,13 +65,6 @@ def extract_contig_and_redesign_positions(pdb_file):
         if current_zero_count:
             contig.append(str(current_zero_count))
     
-    # Format the non-zero segments for contig, ensuring single residues are formatted as "A1-1"
-    #for segment in non_zero_segments:
-    #    chain_id = segment[0][0]
-    #    start = segment[0][1]
-    #    end = segment[-1][1]
-    #    contig.append(f"{chain_id}{start}-{end}")
-    
     contig_str = "/".join(contig)
     
     # Format the redesign positions string
@@ -96,9 +89,21 @@ def extract_contig_and_redesign_positions(pdb_file):
     
     return contig_str, ";".join(redesign_positions_str)
 
-def main(input_dir, output_csv):
+def get_segment_order(rfdiffusion_contig_info, pdb_name):
+    with open(rfdiffusion_contig_info, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[0] == pdb_name:
+                # The segment order is in the last column of the line
+                segments = row[-1].split(";")
+                # Extract chain identifiers and join them as "C;D;B;A"
+                segment_order = ";".join(segment[0] for segment in segments if not segment[0].isnumeric() )
+                return segment_order
+    return ""
+
+def main(input_dir, output_csv, rfdiffusion_contig_info):
     with open(output_csv, 'w', newline='') as csvfile:
-        fieldnames = ["pdb_name", "sample_num", "contig", "redesign_positions"]
+        fieldnames = ["pdb_name", "sample_num", "contig", "redesign_positions", "segment_order"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=',')
         writer.writeheader()
         
@@ -108,19 +113,25 @@ def main(input_dir, output_csv):
                 if pdb_name is not None and sample_num is not None:
                     pdb_file = os.path.join(input_dir, filename)
                     contig, redesign_positions = extract_contig_and_redesign_positions(pdb_file)
+                    
+                    # Get segment order from rfdiffusion_contig_info
+                    segment_order = get_segment_order(rfdiffusion_contig_info, pdb_name)
+                    
                     writer.writerow({
                         "pdb_name": pdb_name,
                         "sample_num": sample_num,
                         "contig": contig,
-                        "redesign_positions": redesign_positions
+                        "redesign_positions": redesign_positions,
+                        "segment_order": segment_order,
                     })
 
 if __name__ == "__main__":
-    if not len(sys.argv) == 3:
-        print("python write_scaffold_lab_motif_info_csv.py <path_to_rfdiffusion_outputs> <path_to_motif_csv_file>")
+    if not len(sys.argv) == 4:
+        print("python write_scaffold_lab_motif_info_csv.py <path_to_rfdiffusion_outputs> <path_to_motif_csv_file> <path_to_rfdiffusion_contig_info>")
         sys.exit(1)
 
     input_directory = sys.argv[1]
     output_file = sys.argv[2]
-    main(input_directory, output_file)
+    rfdiffusion_contig_info = sys.argv[3]
+    main(input_directory, output_file, rfdiffusion_contig_info)
 
