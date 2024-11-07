@@ -71,8 +71,8 @@ and repeated below with a brief description and references for their provenances
 | 35  | 1A41 | A248-280 | | DNA topoisomerase  [11] |
 | 36  | 1LCC | A1-52 | | DNA-binding helix-turn-helix  [11] |
 | 37  | 5ze9 | A229-243| | P-loop  [11] |
-| 38  | 7UWL | E63-73;E101-111 | E104 | IL17-RA interface that interacts with IL17-RB [12] |
-| 39  | 7UWL | E63-73;E101-111;E132-142;E165-174 | E104 | IL17-RA interface that interacts with IL17-RB [12] |
+| 38  | 7UWL | E63-73;E101-111 | E63-73;E101-103;E105-111 | IL17-RA interface that interacts with IL17-RB [12] |
+| 39  | 7UWL | E63-73;E101-111;E132-142;E165-174 | E63-73;E101-103;E105-111;E132-142;E165-174 | IL17-RA interface that interacts with IL17-RB [12] |
 
 The last six problems (6CPA, 1MPY,  1B73,  2RKX,  3B5V, and 4XOJ) are enzyme active sites extracted from various sources detailed in `test_case_sources/other_enzymes/`.
 
