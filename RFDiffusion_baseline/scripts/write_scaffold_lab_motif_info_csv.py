@@ -16,39 +16,39 @@ def extract_contig_and_redesign_positions(pdb_file):
     
     contig = []
     redesign_positions = []
-    current_zero_count = 0
     non_zero_segments = []
     chain_residues = {}
     
     for chain in structure.get_chains():
         current_segment = []
-        current_zero_count = 0
-        in_non_zero_segment = False
+        scaffold_segment_length = 0
+        in_motif = False
         
         for res in chain.get_residues():
             bfactor = res["CA"].get_bfactor() if "CA" in res else 0
             res_id = res.get_id()[1]
             res_name = res.get_resname()
             
-            # Determine if B-factor is zero or non-zero
-            if bfactor == 0:
-                if in_non_zero_segment:
-                    # End of a non-zero segment
+            # Determine if the current residue is part of the motif or scaffold
+            if bfactor == 0:  # Residue `res` is part of the scaffold
+                if in_motif: # A motif segment has just finished
+                    in_motif = False
+
+                    # Create contig component for motif segment.
                     chain_id = current_segment[0][0]
                     start = current_segment[0][1]
                     end = current_segment[-1][1]
                     non_zero_segments.append(current_segment)
                     contig.append(f"{chain_id}{start}-{end}")
                     current_segment = []
-                    in_non_zero_segment = False
-                current_zero_count += 1
-            else:
-                if not in_non_zero_segment:
-                    # End of a zero segment
-                    if current_zero_count:
-                        contig.append(str(current_zero_count))
-                    current_zero_count = 0
-                    in_non_zero_segment = True
+                scaffold_segment_length += 1
+            else: # Residue `res` is part of the motif
+                if not in_motif:  # A motif segment has just started
+                    in_motif = True
+                    if scaffold_segment_length: # A scaffold segment has ended
+                        # Create contig component for scaffold segment.
+                        contig.append(str(scaffold_segment_length))
+                    scaffold_segment_length = 0
                 current_segment.append((chain.id, res_id))
             
             # Check for "UNK" residues for redesign positions
@@ -62,8 +62,8 @@ def extract_contig_and_redesign_positions(pdb_file):
             end = current_segment[-1][1]
             non_zero_segments.append(current_segment)
             contig.append(f"{chain_id}{start}-{end}")
-        if current_zero_count:
-            contig.append(str(current_zero_count))
+        if scaffold_segment_length:
+            contig.append(str(scaffold_segment_length))
     
     contig_str = "/".join(contig)
     
