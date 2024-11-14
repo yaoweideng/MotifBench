@@ -26,6 +26,92 @@ In these files:
 * The header of the motif includes a contig specifying how the motif is placed in the native scaffold. This header can provide guidance for methods that require the length of a scaffold and the order and placement of the motif to be specified. However this aspect of a solution may also be chosen (even dynamically) in a problem-specific manner.
   * Example: for motif specification `4xoj,A55;A99;A190-192,A191` the header contig is `38;A;43;B;90;C;46`. This obtains because 4xoj has 223 resolved residues (indexed as 16 through 238), the 38 corresponds to the 38 residues (16-54) before residue 55 (segment A), the 43 corresponds to the residues between residue 55 and 99 and so on. The final 46 indicates that the native structure terminates with 46 additional residues that are not part of the motif.
 
+## Provide Necessary Inputs for Evaluation
+
+Typically, once designed scaffolds are generated, they'll entering a preprocessing stage including:
+
+*  Backbones are subtracted and renamed by sample numbers. The naming format is {case_number}+{case_name}_{sample_number}.pdb, where `sample_number` follows the **1-based** system. (e.g. 01_1BCF_1.pdb. 01_1BCF_2.pdb,...,01_1BCF_100.pdb).
+* The outputs should be organized like:
+
+```bash
+backbone_outputs
+|-- pdb_case_1
+|    01_{pdb_case_1}_1.pdb
+|    01_{pdb_case_1}_2.pdb
+|    ...
+|    01_{pdb_case_1}_100.pdb
+|
+|-- pdb_case_2
+|    02_{pdb_case_2}_1.pdb
+|    02_{pdb_case_2}_2.pdb
+|    ...
+|    02_{pdb_case_2}_100.pdb
+|  
+|  ......
+|
+|-- pdb_case_41
+|--  41_{pdb_case_41}_1.pdb
+|--  41_{pdb_case_41}_2.pdb
+|--  41_{pdb_case_41}_100.pdb
+```
+
+After that, you need to provide information for motifs and scaffolds. Similar to [the usage within RFdiffusion](https://github.com/RosettaCommons/RFdiffusion?tab=readme-ov-file#motif-scaffolding), we specify them by contigs. 
+
+### Contig Grammar
+
+ A **_contig_** is a placeholder to indicate the information for motifs and scaffolds in designed protein structures. For each protein backbone, you need to provide a contig to show the motif placements and positions to be redesigned. 
+
+Within our grammar system, a complete contig includes **two** to **four** parts separated by a `,` (**comma**). In the following parts, we would use `01_1BCF,12/A92-99/22/A123-130/22/A47-54/24/A18-25/13,A19-25;A47-50;A52-53;A92-93;A95-99;A123-126;A128-129,C;D;B;A` of the benchmark case **_1BCF_** as an example. Separated by the commas are four parts:
+
+* **The native PDB name:** This is for extracting native motifs for calculation and identification. e.g. `01_1BCF` in this case.
+* **Motif Placement:** This part shows the information of where the motifs and scaffolds are placed. e.g. `12/A92-99/22/A123-130/22/A47-54/24/A18-25/13` in this case.
+  - The **motif** parts start with an uppercase letter and contain information about the corresponding **native motifs.** If the numbers are continuous, then separated by **hyphens**. The boundaries of motifs and scaffolds are separated by **slashes**.
+  - The **scaffold** parts are single numbers, which is **deterministic** as the scaffold part of the uploaded PDB files are already placed during the design process. **The motif parts indicate residues in native PDBs but not scaffold PDBs. We choose this way because this would be convenient for users to locate which part the motifs are mimicking corresponding to the reference PDBs.**
+  - Together, the motif placement part provides information about which parts are motifs (indicated by chain letter) and how they correspond to native ones, and the overall length of the designed scaffold. For example, `12/A92-99/22/A123-130/22/A47-54/24/A18-25/13` means the scaffold parts contains:
+    - First a 12-residue scaffold in the N-terminal;
+    - Then a motif part mimicking residue 92~99 in chain A in **_1BCF_**;
+    - Followed by a 22-residue scaffold;
+    - Then a motif part mimicking residue 123~130 in chain A in **_1BCF_**;
+    - Followed by a 22-residue scaffold;
+    - Then a motif part mimicking residue 47~54 in chain A in **_1BCF_**;
+    - Followed by a 24-residue scaffold;
+    - Then a motif part mimicking residue 18~25 in chain A in **_1BCF_**;
+    - Finally a 13-residue scaffold in the C-terminal of the designed structure.
+* **Redesigned positions:** This part indicates which positions to be redesigned in the **reference proteins**, e.g.`A19-25;A47-50;A52-53;A92-93;A95-99;A123-126;A128-129` in this case indicates residue 19~25, 47~50, 52~53, 92~93, 95~99, 123~126, 128~129 of chain A in **_1BCF_**. Different redesigned positions are separated by **semi-colons**; if the positions are continuous, then connected by **hyphens**; always starts with an uppercase chain letter.
+* **Segment order**: The order of multiple motif segments in backbones. For example, for `01_1BCF`, the default motif segment order could be read from [here](https://github.com/blt2114/motif_scaffolding_benchmark?tab=readme-ov-file#benchmark-test-cases): `{"A": A18-25, "B": A47-54, "C": A92-99, "D": A123-130}`. So again, let's take `12/A92-99/22/A123-130/22/A47-54/24/A18-25/13` for **_1BCF_** as an example: In this contig, the ordering of motifs appeared in the designed structure is `A92-99`->`A123-130`->`A47-54`->`A18-25`. Therefore, the resulting segment order should be `C;D;B;A` separated by a `;`(**semicolon**).
+
+> [!NOTE]
+>
+> * It is important to note that **no space** should appear inside even a complete contig! 
+> * For PDB code of `case_name`, we use **uppercase** by default.
+
+The users must specify the contig with the following rules:
+
+- The **overall lengths** of the designed scaffolds are **fixed** within each PDB case and shouldn’t be changed throughout the benchmarking procedure. But we encourage method developers to develop algorithms that allow length-variable designs.
+- The **redesigned positions** of the designed scaffolds should strictly follow the ones presented in the table of the standardized benchmark. 
+- However, the placement of motifs and scaffolds within the overall lengths could be specified by the users themselves, as long as they provide the correct contig for benchmarking.
+
+We provide flexible ways for users to specify the contig information. You can go either way you want within the following choices.
+
+### Specify contig information through a CSV file (Recommended)
+
+For each case, the users should provide the following information:
+
+* `pdb_name`: The case name, which should be identical for each backbone within one specific benchmark case. e.g. `01_1BCF` for **_1BCF_**.
+* `sample_num`: The sample number for each backbone. Should be range from $1$ to $100$ in the standardized benchmark. 
+* `contig`: The **motif placement** string aforementioned indicating the motif and scaffold information for each backbone.
+* `redesign_positions`: The **redesigned positions** aforementioned for which positions to be redesigned for each backbone.
+* `segment_order`: The order of multiple motif segments in backbones. For example, for `01_1BCF`, the default motif segment order could be read from [here](https://github.com/blt2114/motif_scaffolding_benchmark?tab=readme-ov-file#benchmark-test-cases): `{"A": A18-25, "B": A47-54, "C": A92-99, "D": A123-130}`. So again, let's take `12/A92-99/22/A123-130/22/A47-54/24/A18-25/13` for **_1BCF_** as an example: In this contig, the ordering of motifs appeared in the designed structure is `A92-99`->`A123-130`->`A47-54`->`A18-25`. Therefore, the resulting segment order should be `C;D;B;A` separated by a `;`(**semicolon**).
+
+After that, the evaluation pipeline could use this single csv file for mapping between **each designed structure** and their **corresponding motif placements**, which would allow us to evaluate them correctly. 
+
+###   Specify with PDB Header
+
+The users can specify the contig string in the **“classification”** part of the PDB header. Here we have two ways for contig parsing:
+
+* **A complete contig string:** Should be followed the format mentioned above with two or three parts separated by commas. The native PDB ID and motif placement are always necessary, and the part of redesigned positions is additionally provided if there’s a need. 
+* For specification of redesigned positions, another straightforward way is to **index them by the “UNK” residues**. The logic here is, if the code found the contig string just have two parts, it will automatically look for “UNK” residues inside the PDB file and specify them as positions to be redesigned.
+
 
 ## Benchmark test cases
 The benchmark test problems are specified in `./motif_specs.csv`,
@@ -65,12 +151,12 @@ and repeated below with a brief description and references for their provenances
 | 29  | 3B5V | A51-53;A81;A110;A131;A159;A180-184;A210-211;A231-233 | A52;A181;A183;A232 | De novo designed retro-aldol enzyme [9]  |
 | 30  | 4XOJ | A55;A99;A190-192 | A191 | Trypsin catalytic triad and oxyanion hole [10] |
 | 31  | 1QY3 | A58-71;A96;A222  | A62;A65-67;A96;A222 | GFP pre-cyclized state (** must restore residue 96 to Arg rather than keep inactive R96A mutation ** ) [11] |
-| 32  | 1LDB | A186-206 |  | Lactate dehydrogenase  [11] | 
+| 32  | 1LDB | A186-206 |  | Lactate dehydrogenase  [11] |
 | 33  | 1ITU | A124-147 | | Renal dipeptidase  [11] |
 | 34  | 1YOV | B213-223 | |  Ubiquitin-activating enzyme E1C binding  [11] |
 | 35  | 1A41 | A248-280 | | DNA topoisomerase  [11] |
 | 36  | 1LCC | A1-52 | | DNA-binding helix-turn-helix  [11] |
-| 37  | 5ze9 | A229-243| | P-loop  [11] |
+| 37  | 5ZE9 | A229-243| | P-loop  [11] |
 | 38  | 7UWL | E63-73;E101-111 | E63-73;E101-103;E105-111 | IL17-RA interface that interacts with IL17-RB [12] |
 | 39  | 7UWL | E63-73;E101-111;E132-142;E165-174 | E63-73;E101-103;E105-111;E132-142;E165-174 | IL17-RA interface that interacts with IL17-RB [12] |
 
