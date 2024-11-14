@@ -3,19 +3,9 @@
 This repository describes a updated set of benchmark problems and provides code that
 parses a motif specification into a standardized format for motif-scaffolding methods.
 
-## Motif specification format for motifs
-
-A motif present in an existing structure may be specified by a comma-separated string with:
-1. The PDB id of the protein from which the motif is obtained.
-2. The chain and residue indices of the amino acids comprising the motif.  Contiguous segments of residues are concatenated into a list separated by semi-colons.
-3. The chain and indices of residues whose amino acid identity may be redesigned.
 
 
-
-### Examples
-* `7F7P,B32-46;A7-21,B32-46;A7-21` --> two segments of motif. Residues 32 through 46 on chain B and residues 7 through 21 on chain A.  All positions may be redesigned.
-
-* `4xoj,A55;A99;A190-192,A191` --> three segments of motif.  All segments are on chain A.  Residues 55, 99, 190, 191, and 192.  Only residue 191 may be redesigned.
+## Motif Specification Format
 
 ### Motif-file specification
 `./parsing/motif_load_and_parse.ipynb` parses the motif problem specifications 
@@ -84,6 +74,7 @@ Within our grammar system, a complete contig includes **two** to **four** parts 
 >
 > * It is important to note that **no space** should appear inside even a complete contig! 
 > * For PDB code of `case_name`, we use **uppercase** by default.
+> * If redesigned positions is null, simply left the part with nothing. (to be adjusted)
 
 The users must specify the contig with the following rules:
 
@@ -101,11 +92,11 @@ For each case, the users should provide the following information:
 * `sample_num`: The sample number for each backbone. Should be range from $1$ to $100$ in the standardized benchmark. 
 * `contig`: The **motif placement** string aforementioned indicating the motif and scaffold information for each backbone.
 * `redesign_positions`: The **redesigned positions** aforementioned for which positions to be redesigned for each backbone.
-* `segment_order`: The order of multiple motif segments in backbones. For example, for `01_1BCF`, the default motif segment order could be read from [here](https://github.com/blt2114/motif_scaffolding_benchmark?tab=readme-ov-file#benchmark-test-cases): `{"A": A18-25, "B": A47-54, "C": A92-99, "D": A123-130}`. So again, let's take `12/A92-99/22/A123-130/22/A47-54/24/A18-25/13` for **_1BCF_** as an example: In this contig, the ordering of motifs appeared in the designed structure is `A92-99`->`A123-130`->`A47-54`->`A18-25`. Therefore, the resulting segment order should be `C;D;B;A` separated by a `;`(**semicolon**).
+* `segment_order`: The order of multiple motif segments in backbones. 
 
 After that, the evaluation pipeline could use this single csv file for mapping between **each designed structure** and their **corresponding motif placements**, which would allow us to evaluate them correctly. 
 
-###   Specify with PDB Header
+###   Specify through PDB Header
 
 The users can specify the contig string in the **“classification”** part of the PDB header. Here we have two ways for contig parsing:
 
