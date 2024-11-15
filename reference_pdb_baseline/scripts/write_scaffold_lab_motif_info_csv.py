@@ -2,13 +2,48 @@ import sys
 import os
 import re
 import csv
-from Bio.PDB import PDBParser
+from Bio.PDB import PDBParser, PDBIO, Structure, Model, Chain, Residue
+
+
+def reindex_pdb(input_pdb, output_pdb):
+    # Parse the input PDB file
+    parser = PDBParser(QUIET=True)
+    structure = parser.get_structure("structure", input_pdb)
+    
+    # Assume there is only one model and one chain in the structure
+    original_chain = structure[0].child_list[0]  # Get the first (and only) chain
+
+    # Create a new structure with a single model and chain
+    new_structure = Structure.Structure("reindexed_structure")
+    new_model = Model.Model(0)
+    new_chain = Chain.Chain("A")  # Use "A" as the chain ID for the new structure
+    new_model.add(new_chain)
+    new_structure.add(new_model)
+
+    # Set new residue index starting from 1
+    new_index = 1
+    for residue in original_chain:
+        # Skip heteroatoms (HETATM) to avoid reindexing them
+        if residue.id[0] != " ":
+            continue
+
+        # Copy the residue and assign a new unique index
+        new_residue = residue.copy()
+        new_residue.id = (" ", new_index, " ")
+        new_chain.add(new_residue)
+        new_index += 1  # Increment index for the next residue
+
+    # Save the modified structure to the output file
+    io = PDBIO()
+    io.set_structure(new_structure)
+    io.save(output_pdb)
+
 
 def parse_pdb_name(filename):
-    match = re.match(r"(.+)_(\d+)\.pdb", filename)
+    match = re.match(r"(.+)\.pdb", filename)
     if match:
-        return match.group(1), int(match.group(2))
-    return None, None
+        return match.group(1)
+    return None
 
 def extract_contig_and_redesign_positions(pdb_file):
     parser = PDBParser(QUIET=True)
@@ -30,7 +65,7 @@ def extract_contig_and_redesign_positions(pdb_file):
             res_name = res.get_resname()
             
             # Determine if the current residue is part of the motif or scaffold
-            if bfactor == 0:  # Residue `res` is part of the scaffold
+            if bfactor != 1.:  # Residue `res` is part of the scaffold
                 if in_motif: # A motif segment has just finished
                     in_motif = False
 
@@ -95,7 +130,7 @@ def get_segment_order(rfdiffusion_contig_info, pdb_name):
         for row in reader:
             if row[0] == pdb_name:
                 # The segment order is in the last column of the line
-                segments = row[-1].split(";")
+                segments = sorted(row[-1].split(";"))
                 # Extract chain identifiers and join them as "C;D;B;A"
                 segment_order = ";".join(segment[0] for segment in segments if not segment[0].isnumeric() )
                 return segment_order
@@ -108,9 +143,12 @@ def main(input_dir, output_csv, rfdiffusion_contig_info):
         writer.writeheader()
         
         for filename in os.listdir(input_dir):
+            print(filename)
             if filename.endswith(".pdb"):
-                pdb_name, sample_num = parse_pdb_name(filename)
-                if pdb_name is not None and sample_num is not None:
+                reindex_pdb(input_dir + "/" + filename,input_dir + "/" +  filename)
+                pdb_name = filename.split("/")[-1].split(".")[0]
+                pdb_name = pdb_name[:7]
+                if pdb_name is not None:
                     pdb_file = os.path.join(input_dir, filename)
                     contig, redesign_positions = extract_contig_and_redesign_positions(pdb_file)
                     
@@ -119,7 +157,7 @@ def main(input_dir, output_csv, rfdiffusion_contig_info):
                     
                     writer.writerow({
                         "pdb_name": pdb_name,
-                        "sample_num": sample_num,
+                        "sample_num": 0,
                         "contig": contig,
                         "redesign_positions": redesign_positions,
                         "segment_order": segment_order,
@@ -127,7 +165,7 @@ def main(input_dir, output_csv, rfdiffusion_contig_info):
 
 if __name__ == "__main__":
     if not len(sys.argv) == 4:
-        print("python write_scaffold_lab_motif_info_csv.py <path_to_rfdiffusion_outputs> <path_to_motif_csv_file> <path_to_rfdiffusion_contig_info>")
+        print("python write_scaffold_lab_motif_info_csv.py <path_to_reference_pdb_dir> <path_to_motif_csv_file> <path_to_rfdiffusion_contig_info>")
         sys.exit(1)
 
     input_directory = sys.argv[1]
