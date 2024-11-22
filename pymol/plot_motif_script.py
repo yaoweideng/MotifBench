@@ -16,14 +16,13 @@ def process_pdb(pdb, ranges, idx=None):
     cmd.util.cbc(pdb, first_color=7)
     cmd.set('transparency', 0.6, pdb)
 
-    # Hid everything initially
+    # Hide everything initially
     cmd.hide('everything', pdb)
 
     for i, res_range in enumerate(ranges):
         if res_range:
             chain = res_range[0]
             res_range = res_range[1:]
-            print("pdb, range:", pdb, res_range)
             selection_name = f'{pdb}_range_{i}'
             cmd.select(selection_name, f'model {pdb} and resi {res_range} and chain {chain}')
 
@@ -59,6 +58,7 @@ def plot_motifs(csv_file):
         csv_reader = csv.reader(file)
 
         for i, row in enumerate(csv_reader):
+            if i==0: continue # skip header
             pdb = row[pdb_index]
             ranges = row[motif_contig_index].split(";")
             process_pdb(pdb, ranges, idx=i)

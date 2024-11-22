@@ -1,3 +1,2 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:faff79dbe56afb4e6a6d442cc02c184be9aa70e96f6eceae1f3245214a31f931
-size 88
+pdb_name,sample_num,contig,redesign_positions,segment_order
+23_7WRK,0,63/A64-78/82,,A
