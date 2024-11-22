@@ -163,7 +163,7 @@ base_output_dir=
 
 Then from the repository directory run the evaluation script on a single example as:
 ```
-./scripts/evaluate_bbs.sh 16_7AHO_0 0 config.txt
+./scripts/evaluate_bbs.sh 16_7AHO 0 config.txt
 ```
 
 Or run on the whole set of scaffolds as:
