@@ -1,7 +1,13 @@
-gpu_count=8  # Replace with the actual number of GPUs available
+#!/usr/bin/bash
+# This script runs evaluate.sh on all motifs in the specified directory.  The
+# evaluation for the next motif is launched whenever a next GPU becomes
+# available.
+
+gpu_count=8  # Number of GPUs available
 i=0
-log_dir=/projects/m000018/projects/RFDiffusion_benchmarking/test4_eval/logs/
-results_bb_dir=/projects/m000018/projects/RFDiffusion_benchmarking/test4
+results_bb_dir=/home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/
+log_dir=$results_bb_dir/logs/
+mkdir $log_dir
 ls $results_bb_dir | while read l; do
     # Find an available GPU by checking for processes using each GPU
     while true; do
@@ -17,9 +23,9 @@ ls $results_bb_dir | while read l; do
 
         # GPU is free; assign job to this GPU and increment index
         echo "Running $l on GPU $gpu_id"
-	out_fn=$log_dir/$l.out
-	err_fn=$log_dir/$l.err
-        CUDA_VISIBLE_DEVICES=$gpu_id ./evaluate_bbs.sh $l >$out_fn 2> $err_fn &
+        out_fn=$log_dir/$l.out
+        err_fn=$log_dir/$l.err
+        CUDA_VISIBLE_DEVICES=$gpu_id ./evaluate_bbs.sh $l $gpu_id >$out_fn 2> $err_fn &
         i=$((i + 1))
         sleep 60  # Add a small delay before starting the next job
         break

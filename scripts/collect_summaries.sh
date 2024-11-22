@@ -11,12 +11,11 @@ eval_dir=$1
 all_summaries_fn=$eval_dir/all_summary_paths.txt
 ls $eval_dir/*/summary.txt > $all_summaries_fn
 
-
 # Output CSV file
 output_file=$2
 
 # Initialize the output CSV file with headers
-echo "Path,Protein,Designability_Fraction,Diversity,Novelty_Score" > "$output_file"
+echo "Path,Protein,Num_Solutions,Novelty,Success_rate" > "$output_file"
 
 # Loop through each summary file path in the input file
 while IFS= read -r summary_file; do
@@ -24,12 +23,12 @@ while IFS= read -r summary_file; do
     # Extract relevant fields from the summary file
     path=$(awk -F': ' '/evaluation results for/ {print $2}' "$summary_file")
     protein=$(awk -F': ' '/Evaluated Protein/ {print $2}' "$summary_file")
-    designability_fraction=$(awk -F': ' '/Designability Fraction/ {gsub("%", "", $2); printf "%.2f", $2}' "$summary_file")
-    diversity=$(awk -F': ' '/Diversity/ {printf "%.2f", $2}' "$summary_file")
-    novelty_score=$(awk -F': ' '/Novelty Score/ {printf "%.2f", $2}' "$summary_file")
+    num_solutions=$(awk -F': ' '/Number of distict solutions/ {print $2}' "$summary_file")
+    novelty=$(awk -F': ' '/Novelty/ {printf "%.3f", $2}' "$summary_file")
+    success_rate=$(awk -F': ' '/Success rate/ {gsub("%", "", $2); printf "%.2f", $2}' "$summary_file")
 
     # Append the extracted information to the output CSV
-    echo "$path,$protein,$designability_fraction,$diversity,$novelty_score" >> "$output_file"
+    echo "$path,$protein,$num_solutions,$novelty,$success_rate" >> "$output_file"
   else
     echo "Warning: File $summary_file not found. Skipping..."
   fi
