@@ -153,6 +153,20 @@ git lfs fetch --all
 git lfs checkout
 ```
 
+Several paths must be specified in a configuration file which is given as input to the evaluation script.
+```
+# Paths configuration
+benchmark_dir=
+foldseek_db_path=
+base_output_dir=
+```
 
+Then from the repository directory run the evaluation script on a single example as:
+```
+./scripts/evaluate_bbs.sh 16_7AHO_0 0 config.txt
+```
 
-
+Or run on the whole set of scaffolds as:
+```
+./scripts/launch_all.sh config.txt
+```
