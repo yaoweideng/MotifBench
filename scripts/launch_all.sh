@@ -3,6 +3,12 @@
 # evaluation for the next motif is launched whenever a next GPU becomes
 # available.
 
+config_path=$1
+if [ "$#" -ne 1 ]; then
+    echo "Usage: ./launch_all.sh <config_file_path>"
+    exit 1
+fi
+
 gpu_count=8  # Number of GPUs available
 i=0
 results_bb_dir=/home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/
@@ -25,7 +31,7 @@ ls $results_bb_dir | while read l; do
         echo "Running $l on GPU $gpu_id"
         out_fn=$log_dir/$l.out
         err_fn=$log_dir/$l.err
-        CUDA_VISIBLE_DEVICES=$gpu_id ./evaluate_bbs.sh $l $gpu_id >$out_fn 2> $err_fn &
+        CUDA_VISIBLE_DEVICES=$gpu_id ./evaluate_bbs.sh $l $gpu_id $config_path >$out_fn 2> $err_fn &
         i=$((i + 1))
         sleep 60  # Add a small delay before starting the next job
         break
