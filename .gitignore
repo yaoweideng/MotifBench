@@ -1,2 +1,4 @@
 .*
 *~
+reference_pdb_baseline/eval_results/*
+!reference_pdb_baseline/eval_results/*/summary.txt
