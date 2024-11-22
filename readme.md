@@ -1,4 +1,4 @@
-# Motif-Scaffolding Benchmark Test Cases
+# Motif-Scaffolding Benchmark V1.0
 
 This repository describes a updated set of benchmark problems and provides code that
 parses a motif specification into a standardized format for motif-scaffolding methods.
@@ -12,7 +12,7 @@ parses a motif specification into a standardized format for motif-scaffolding me
 writes out target motifs as `.pdb` files to be used as input for motif scaffolding methods.
 In these files:
 * Each segment of the motif is labeled as its own chain (i.e. A, B, C, etc).
-* For residues for which the amino acide type may be redesigned, all atoms other than N, CA, C, and O are removed and the residue type is set to unknown (`UNK`).  Side-chain heavy atoms are included for other residues.
+* For residues for which the amino acid type may be redesigned, all atoms other than N, CA, C, and O are removed and the residue type is set to unknown (`UNK`).  Side-chain heavy atoms are included for other residues.
 * The header of the motif includes a contig specifying how the motif is placed in the native scaffold. This header can provide guidance for methods that require the length of a scaffold and the order and placement of the motif to be specified. However this aspect of a solution may also be chosen (even dynamically) in a problem-specific manner.
   * Example: for motif specification `4xoj,A55;A99;A190-192,A191` the header contig is `38;A;43;B;90;C;46`. This obtains because 4xoj has 223 resolved residues (indexed as 16 through 238), the 38 corresponds to the 38 residues (16-54) before residue 55 (segment A), the 43 corresponds to the residues between residue 55 and 99 and so on. The final 46 indicates that the native structure terminates with 46 additional residues that are not part of the motif.
 
@@ -106,63 +106,53 @@ The users can specify the contig string in the **“classification”** part of 
 
 ## Benchmark test cases
 The benchmark test problems are specified in `./motif_specs.csv`,
-and repeated below with a brief description and references for their provenances.
+# Benchmark V1.0 Test-Cases
+
+| #  | PDB ID | Group | Length | Motif Residues                  | Positions where residue may be designed                      | Description                        |
+|----|--------|-------|--------|---------------------------------|-------------------------------------------------------------|------------------------------------|
+| 1  | 1BCF   | 1     | 125    | A18-25;A47-54;A92-99;A123-130   | A19-25;A47-50;A52-53;A92-93;A95-99;A123-126;A128-129         | Di-iron binding motif              |
+| 2  | 1YOV   | 1     | 75     | B213-223                       |                                                             | Ubiquitin-activating enzyme E1C binding |
+| 3  | 2KL8   | 1     | 100    | A1-7;A28-79                    |                                                             | De novo designed protein           |
+| 4  | 6E6R   | 1     | 75     | A23-35                         | A23-35                                                     | Ferridoxin Protein                 |
+| 5  | 6E6R   | 1     | 200    | A23-35                         | A23-35                                                     | Ferridoxin Protein                 |
+| 6  | 6EXZ   | 1     | 100    | A556-570                       | A556-570                                                   | RNA export factor                  |
+| 7  | 6EXZ   | 1     | 200    | A556-570                       | A556-570                                                   | RNA export factor                  |
+| 8  | 1ITU   | 2     | 150    | A124-147                       |                                                             | Renal dipeptidase                  |
+| 9  | 1LDB   | 2     | 125    | A186-206                       |                                                             | Lactate dehydrogenase              |
+| 10 | 5IUS   | 2     | 100    | A63-82;A119-140                | A63;A65;A67;A69;A71-72;A76;A79-80;A82;A119-123;A125;A127;A129-130;A133;A135;A137-138;A140 | PD-L1 binding interface on PD-1    |
+| 11 | 5WN9   | 2     | 75     | A170-189                       | A170-175;A188-189                                          | RSV G-protein 2D10 site            |
+| 12 | 5YUI   | 2     | 75     | A93-97;A118-120;A198-200       | A93;A95;A97;A118;A120                                      | Carbonic anhydrase active site     |
+| 13 | 7A8S   | 2     | 100    | A41-55;A72-86                  |                                                             | Orphan protein                     |
+| 14 | 7AHO   | 2     | 125    | A199-213                       |                                                             | Orphan protein                     |
+| 15 | 7BNY   | 2     | 125    | A83-97;A111-125                |                                                             | Orphan protein                     |
+| 16 | 7DGW   | 2     | 125    | A22-36;A70-84                  |                                                             | Orphan protein                     |
+| 17 | 7MQQ   | 2     | 125    | A80-94;A115-129                |                                                             | Orphan protein                     |
+| 18 | 1B73   | 3     | 125    | A7-8;A70;A178-180              | A179                                                       | Glutamate racemase active site     |
+| 19 | 1LCC   | 3     | 150    | A1-52                          |                                                             | DNA-binding helix-turn-helix       |
+| 20 | 1MPY   | 3     | 125    | A153;A199;A214;A246;A255;A265  |                                                             | Catechol deoxygenase active site   |
+| 21 | 1QY3   | 3     | 225    | A58-71;A96;A222                | A62;A65-67;A96;A222                                        | GFP pre-cyclized state             |
+| 22 | 2RKX   | 3     | 225    | A9-11;A48-50;A101;A128;A169;A176;A201;A222-224 | A10;A49;A223                                               | De novo designed Kemp eliminase    |
+| 23 | 3B5V   | 3     | 200    | A51-53;A81;A110;A131;A159;A180-184;A210-211;A231-233 | A52;A181;A183;A232                                         | De novo designed retro-aldol enzyme |
+| 24 | 4JHW   | 3     | 125    | F63-69;F196-212                | F63;F69;F196;F198;F203;F211-212                            | RSV F-protein Site 0               |
+| 25 | 4XOJ   | 3     | 150    | A55;A99;A190-192               | A191                                                       | Trypsin catalytic triad and oxyanion hole |
+| 26 | 6CPA   | 3     | 200    | A69-72;A127;A196;A248;A270     | A70-71                                                     | Carboxypeptidase active site       |
+| 27 | 7AD5   | 3     | 125    | A99-113                        |                                                             | Orphan protein                     |
+| 28 | 7WRK   | 3     | 125    | A80-94                         |                                                             | Orphan protein                     |
+| 29 | 7UWL   | 3     | 175    | E63-73;E101-111                | E63-73;E101-103;E105-111                                   | IL17-RA interface to IL17-RB       |
+| 30 | 7UWL   | 3     | 175    | E63-73;E101-111;E132-142;E165-174 | E63-73;E101-103;E105-111;E132-142;E165-174                 | IL17-RA interface to IL17-RB       |
 
 
-| #  | PDB  | Motif Residues | Redesigned Positions | Description |
-| -- | ---- | -------------- | -------------------- | ----------- |
-| 1  | 1BCF | A18-25;A47-54;A92-99;A123-130 | A19-25;A47-50;A52-53;A92-93;A95-99;A123-126;A128-129 | Di-iron binding motif [1] |
-| 2  | 5TPN | A163-181 | A163-168;A170-171;A179 | RSV F-protein Site V [1] |
-| 3  | 5IUS | A119-140;A63-82 | A63;A65;A67;A69;A71-72;A76;A79-80;A82;A119-123;A125;A127;A129-130;A133;A135;A137-138;A140 | PD-L1 binding interface on PD-1 [1] |
-| 4  | 3IXT | P254-277 | P255;P258-259;P262-263;P268;P271-272;P275-276 | RSV F-protein Site II [2] |
-| 5  | 5YUI | A93-97;A118-120;A198-200 | A93;A95;A97;A118;A120 | Carbonic anhydrase active site [1] |
-| 6  | 1YCR | B19-27 | B20-22;B24-25 | P53 helix that binds to Mdm2 [1] |
-| 7  | 2KL8 | A1-7;A28-79 | | De novo designed protein [1] |
-| 8  | 7MRX | B25-46 | B25-46 | Barnase ribonuclease inhibitor [3] |
-| 9  | 4JHW | F63-69;F196-212 | F63;F69;F196;F198;F203;F211-212 | RSV F-protein Site 0 [4] |
-| 10  | 4ZYP | A422-436 | A422-427;A430-431;A433-43 | RSV F-protein Site 4 [4] |
-| 11  | 5WN9 | A170-189 | A170-175;A188-189 | RSV G-protein 2D10 site [2] |
-| 12  | 5TRV | A45-65 | A45-65 | De novo designed protein [5] |
-| 13  | 6E6R | A23-35 | A23-35 | Ferridoxin Protein [5] |
-| 14  | 6EXZ | A556-570 | A556-570 | RNA export factor [5] |
-| 15  | 7A8S | A41-55;A72-86 |  | Orphan protein [6] |
-| 16  | 7AD5 | A99-113 |  | Orphan protein [6] |
-| 17  | 7AHO | A199-213 |  | Orphan protein [6] |
-| 18  | 7BNY | A83-97;A111-125 |  | Orphan protein [6] |
-| 19  | 7DGW | A22-36;A70-84 |  | Orphan protein [6] |
-| 20  | 7KUW | A2-16;A30-44 |  | Orphan protein [6] |
-| 21  | 7KWW | B14-28 |  | Orphan protein [6] |
-| 22  | 7MQQ | A80-94;A115-129 |  | Orphan protein [6] |
-| 23  | 7S5L | A27-41;A77-91 |  | Orphan protein [6] |
-| 24  | 7WRK | A80-94 |  | Orphan protein [6] |
-| 25  | 6CPA | A69-72;A127;A196;A248;A270 | A70-71 | Carboxypeptidase active site  [7] |
-| 26  | 1MPY | A153;A199;A214;A246;A255;A265 |  | catechol deoxygenase active site [7] |
-| 27  | 1B73 | A7-8;A70;A178-180 | A179 | Glutamate racemase active site [7] |
-| 28  | 2RKX | A9-11;A48-50;A101;A128;A169;A176;A201;A222-224 | A10;A49;A223 | De novo designed Kemp eliminase [8] |
-| 29  | 3B5V | A51-53;A81;A110;A131;A159;A180-184;A210-211;A231-233 | A52;A181;A183;A232 | De novo designed retro-aldol enzyme [9]  |
-| 30  | 4XOJ | A55;A99;A190-192 | A191 | Trypsin catalytic triad and oxyanion hole [10] |
-| 31  | 1QY3 | A58-71;A96;A222  | A62;A65-67;A96;A222 | GFP pre-cyclized state (** must restore residue 96 to Arg rather than keep inactive R96A mutation ** ) [11] |
-| 32  | 1LDB | A186-206 |  | Lactate dehydrogenase  [11] |
-| 33  | 1ITU | A124-147 | | Renal dipeptidase  [11] |
-| 34  | 1YOV | B213-223 | |  Ubiquitin-activating enzyme E1C binding  [11] |
-| 35  | 1A41 | A248-280 | | DNA topoisomerase  [11] |
-| 36  | 1LCC | A1-52 | | DNA-binding helix-turn-helix  [11] |
-| 37  | 5ZE9 | A229-243| | P-loop  [11] |
-| 38  | 7UWL | E63-73;E101-111 | E63-73;E101-103;E105-111 | IL17-RA interface that interacts with IL17-RB [12] |
-| 39  | 7UWL | E63-73;E101-111;E132-142;E165-174 | E63-73;E101-103;E105-111;E132-142;E165-174 | IL17-RA interface that interacts with IL17-RB [12] |
+## Example Evaluation
+We have included an example collection of scaffolds for all benchmark problems produced by [RosettaFold Diffusion](https://github.com/RosettaCommons/RFdiffusion) in [./RFDiffusion_baseline/rfdiffusion_test_run/](RFDiffusion_baseline/rfdiffusion_test_run/).
 
-The last six problems (6CPA, 1MPY,  1B73,  2RKX,  3B5V, and 4XOJ) are enzyme active sites extracted from various sources detailed in `test_case_sources/other_enzymes/`.
+To run the evaluation you must first download the files. 
+These are stored with `git-lfs`
+which must be installed (see instructions [here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage).
+```
+git lfs fetch --all
+git lfs checkout
+```
 
-### References:
-* [1] https://www.science.org/doi/10.1126/science.abn2100
-* [2] https://www.nature.com/articles/s41589-020-00699-x
-* [3] https://www.nature.com/articles/s43588-023-00440-3
-* [4] https://www.science.org/doi/10.1126/science.aay5051
-* [5] https://arxiv.org/abs/2206.04119
-* [6] https://www.biorxiv.org/content/10.1101/2022.07.21.500999v1
-* [7] https://academic.oup.com/nar/article/46/D1/D618/4584620
-* [8] https://www.nature.com/articles/nature06879 
-* [9] https://pubmed.ncbi.nlm.nih.gov/18323453/
-* [10] https://www.biorxiv.org/content/10.1101/2024.02.28.582624v2
-* [11] https://www.evolutionaryscale.ai/papers/esm3-simulating-500-million-years-of-evolution-with-a-language-model
-* [12] https://www.nature.com/articles/s41586-022-05116-y
+
+
+

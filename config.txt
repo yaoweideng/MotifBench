@@ -1,0 +1,4 @@
+# Paths configuration
+benchmark_dir=
+foldseek_db_path=
+base_output_dir=

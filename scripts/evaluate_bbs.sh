@@ -1,22 +1,39 @@
 #!/usr/bin/bash
 
-# Check that a motif and gpu_id are specified
-if [ "$#" -ne 2 ]; then
-    echo "Usage: ./evaluate_bbs.sh motif_name gpu_id"
-    echo "For example: ./evaluate_bbs.sh 00_1BCF 0"
+# Check that a motif, gpu_id, and config file are specified
+if [ "$#" -ne 3 ]; then
+    echo "Usage: ./evaluate_bbs.sh motif_name gpu_id config_file"
+    echo "For example: ./evaluate_bbs.sh 00_1BCF 0 config.txt"
     exit 1
 fi
+
 motif_name=$1
 gpu_id=$2
-echo "running on " $motif_name
+config_file=$3
 
-# Set paths
-benchmark_dir=/home/users/btrippe/projects/motif_scaffolding_benchmark/
-output_dir_base=/home/groups/btrippe/projects/motif_scaffolding/2024_11_20_debug/
-foldseek_db_path=/home/groups/btrippe/datasets/foldseek/pdb_database/pdb
+# Check if the configuration file exists
+if [ ! -f "$config_file" ]; then
+    echo "Error: Configuration file '$config_file' does not exist."
+    exit 1
+fi
+
+# Source the configuration file
+source "$config_file"
+
+# Ensure necessary variables are set in the config file
+if [ -z "$benchmark_dir" ] || [ -z "$foldseek_db_path" ] || [ -z "$base_output_dir" ]; then
+    echo "Error: Configuration file is missing necessary settings."
+    echo "Ensure it includes 'benchmark_dir', 'foldseek_db_path', and 'base_output_dir'."
+    exit 1
+fi
+
+echo "Running on motif: $motif_name with GPU ID: $gpu_id"
+
+# Set derived paths
+output_dir=$base_output_dir/$motif_name/
 bb_dir=$benchmark_dir/RFDiffusion_baseline/rfdiffusion_test_run/$motif_name
 
-output_dir=$output_dir_base/$motif_name/
+# Create output directory if it doesn't exist
 if [ ! -d "$output_dir" ]; then
     mkdir -p "$output_dir"
 fi
@@ -28,7 +45,5 @@ python scaffold_lab/motif_scaffolding/motif_refolding.py \
     inference.backbone_pdb_dir=$bb_dir \
     inference.motif_pdb=$benchmark_dir/motif_pdbs/$motif_name".pdb" \
     inference.output_dir=$output_dir \
-    inference.hide_GPU_from_pmpnn=True \
     inference.gpu_id=$gpu_id \
-    evaluation.foldseek_database=$foldseek_db_path \
-    evaluation.foldseek_cores_for_pdbTM=4
+    evaluation.foldseek_database=$foldseek_db_path
