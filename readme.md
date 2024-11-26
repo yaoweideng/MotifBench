@@ -131,8 +131,9 @@ Then compile results as
 TODO say something about metrics that are saved and show a summary output...
 
 
-## Demonstration of evaluation on an example set of scaffolds
-We have included an example collection of scaffolds for all benchmark problems produced by [RosettaFold Diffusion](https://github.com/RosettaCommons/RFdiffusion) in [./RFDiffusion_baseline/rfdiffusion_test_run/](RFDiffusion_baseline/rfdiffusion_test_run/).
+## Demonstration of example set of scaffolds and evaluation
+We have included an example collection of scaffolds for all benchmark problems produced by [RosettaFold Diffusion](https://github.com/RosettaCommons/RFdiffusion) in [./example/rfdiffusion_test_run/](./example/rfdiffusion_test_run/).
+Further information is provided in [here](./example/readme.md).
 
 To run the evaluation you must first download the files. 
 These are stored with `git-lfs`
@@ -141,6 +142,7 @@ which must be installed (see instructions [here](https://docs.github.com/en/repo
 git lfs fetch --all
 git lfs checkout
 ```
+
 
 ## Motif Specification Format
 `./parsing/motif_load_and_parse.ipynb` parses the motif problem specifications 
