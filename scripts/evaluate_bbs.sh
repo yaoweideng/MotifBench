@@ -38,12 +38,18 @@ if [ ! -d "$output_dir" ]; then
     mkdir -p "$output_dir"
 fi
 
+# Make motif_info.csv from scaffold_info.csv
+motif_pdb_path=$benchmark_dir/motif_pdbs/$motif_name".pdb"
+echo $benchmark_dir/scripts/write_motifInfo_from_scaffoldInfo.py  $bb_dir/scaffold_info.csv  $motif_pdb_path $bb_dir/motif_info_update.csv 
+$benchmark_dir/scripts/write_motifInfo_from_scaffoldInfo.py  $bb_dir/scaffold_info.csv  $motif_pdb_path $bb_dir/motif_info.csv 
+
+
 # Run benchmarking
 cd $benchmark_dir/Scaffold-Lab/
 python scaffold_lab/motif_scaffolding/motif_refolding.py \
     inference.motif_csv_path=$bb_dir/motif_info.csv \
     inference.backbone_pdb_dir=$bb_dir \
-    inference.motif_pdb=$benchmark_dir/motif_pdbs/$motif_name".pdb" \
+    inference.motif_pdb=$motif_pdb_path \
     inference.output_dir=$output_dir \
     inference.gpu_id=$gpu_id \
     evaluation.foldseek_database=$foldseek_db_path
