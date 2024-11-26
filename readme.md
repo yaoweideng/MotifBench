@@ -102,6 +102,9 @@ The metadata file should be named `scaffold_info.csv` and contain two columns:
 
 The workhorse benchmarking evaluation steps are implemented in [Scaffold-Lab](https://github.com/Immortals-33/Scaffold-Lab), which must first be installed:
 ```
+# Clone the repo and submodule
+git clone --recurse-submodules git@github.com:blt2114/motif_scaffolding_benchmark.git
+
 TODO: SCAFFOLD_LAB INSTALL STEPS from Readme
 ```
 
