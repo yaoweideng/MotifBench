@@ -1,13 +1,14 @@
 #!/bin/bash
 benchmark_dir=/home/users/btrippe/projects/motif_scaffolding_benchmark/
-example_dir=$benchmark_dir/example/
 output_base=/home/groups/btrippe/projects/motif_scaffolding/2024_11_26/rfdiffusion/
+model_dir=/home/users/btrippe/projects/motif_scaffolding_benchmark_original/RFDiffusion_baseline/RFdiffusion/models/
+
+example_dir=$benchmark_dir/example/
 motif_dir=$benchmark_dir/motif_pdbs/
-rfdiffusion_source_dir=/home/users/btrippe/projects/motif_scaffolding_benchmark_original/RFDiffusion_baseline/RFdiffusion/
 
 csv_path=$example_dir/contig_specifications.csv
 scripts_dir=$example_dir/scripts/run_scripts/
-model_dir=$rfdiffusion_source_dir/models/
+mkdir -p $scripts_dir
 log_dir=$output_base/logs/
 mkdir -p $log_dir
 
@@ -27,7 +28,6 @@ cat $csv_path | while read l; do
 #SBATCH --gpus=1
 #SBATCH -c 4"
     printf "%s\n" "$slurm_header" > $script_fn
-    echo "export NGC_API_KEY=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" >> $script_fn
     echo "docker_sifs_path=$GROUP_HOME/docker/" >> $script_fn
     echo "base_dir=/home/users/btrippe/projects/motif_scaffolding_benchmark_original/RFDiffusion_baseline/RFdiffusion/" >> $script_fn
     std_out=$log_dir/$motif_name.out
@@ -36,7 +36,6 @@ cat $csv_path | while read l; do
       --bind \$base_dir/models:\$base_dir/models \\
       --bind \$base_dir/inputs:\$base_dir/inputs \\
       --bind \$base_dir/outputs:\$base_dir/outputs \\
-      --env NGC_API_KEY=\$NGC_API_KEY \\
       \$docker_sifs_path/rfdiffusion.sif \\
       python3 $example_dir/run_inference.py \\
             inference.output_prefix=$output_prefix \\
