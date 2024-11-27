@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6244ffc497555e604ada2b70970dced21098e394b44f001b8366f86fc75ec1d3
-size 281
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/03_3IXT:
+Evaluated Protein: 03_3IXT
+Designability Fraction: 93.00%
+Diversity: 0.04
+Novelty Score: 0.28400000000000003

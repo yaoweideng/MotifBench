@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cdc347fa2e7652ee889849edbd886da6eca9846494f7ad4796555e199e3fb8d5
-size 289
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/29_4XOJ:
+Evaluated Protein: 29_4XOJ
+Number distict solutions: 1
+Designability Fraction: 100.00%
+Novelty Score: 0.0020000000000000018

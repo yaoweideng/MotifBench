@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:455846ce0760b27de4c0d026ff3afa0aebab723ec58f7daf66f40ea09c33a899
-size 258
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/20_7KWW:
+Evaluated Protein: 20_7KWW
+Designability Fraction: 0.00%
+Diversity: 0.00
+Novelty Score: null

@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0e9adeb656a2b479570aa3f698fdea0af047300ad348f465a0bfa82200292880
-size 258
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/02_5IUS:
+Evaluated Protein: 02_5IUS
+Designability Fraction: 0.00%
+Diversity: 0.00
+Novelty Score: null

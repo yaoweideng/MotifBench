@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4f92ac35f46164cf6cd07edcfbd7b3c7275eb834a3b3c44aaff80b9ae4db1791
-size 277
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/24_6CPA:
+Evaluated Protein: 24_6CPA
+Designability Fraction: 100.00%
+Diversity: 1.00
+Novelty Score: 0.0020000000000000018

@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1f4ff3ba758aa8eeed22cea32c4a3a56d69f58e1622c14630151ae92a986c0fd
-size 276
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/17_7BNY:
+Evaluated Protein: 17_7BNY
+Designability Fraction: 100.00%
+Diversity: 1.00
+Novelty Score: 0.026000000000000023

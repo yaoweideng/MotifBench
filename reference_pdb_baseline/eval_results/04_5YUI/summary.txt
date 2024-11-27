@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7fbc56a963eb816f97ac2bd5f432f9eb751b8890c4ce167d91bf137ff940332e
-size 271
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/04_5YUI:
+Evaluated Protein: 04_5YUI
+Number distict solutions: 1
+Designability Fraction: 100.00%
+Novelty Score: 0.0

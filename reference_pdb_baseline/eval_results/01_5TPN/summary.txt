@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:31185830daf666ecf614d1247d6231c6447ab763571e5c957edbc0d85b4acb68
-size 270
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/01_5TPN:
+Evaluated Protein: 01_5TPN
+Number distict solutions: 0
+Designability Fraction: 0.00%
+Novelty Score: null

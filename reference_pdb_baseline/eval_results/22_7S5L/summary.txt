@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:088bc19a31bcd8492549b969512839f210f7e7cfff68b0d50deb547e754084dc
-size 271
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/22_7S5L:
+Evaluated Protein: 22_7S5L
+Number distict solutions: 1
+Designability Fraction: 100.00%
+Novelty Score: 0.0

@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e53b7bc36d6d6dc778f4c1f13cf837663849fdab176540731b9cc5b2591f8a92
-size 271
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/12_6E6R:
+Evaluated Protein: 12_6E6R
+Number distict solutions: 1
+Designability Fraction: 100.00%
+Novelty Score: 0.0

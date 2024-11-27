@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f3b7eba7083c38c654607c968c76f9a7df1f95173a684471dac0405086329ed8
-size 265
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/35_1lcc:
+Evaluated Protein: 35_1lcc
+Designability Fraction: 0.00%
+Diversity: 0.00
+Novelty Score: null

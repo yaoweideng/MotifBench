@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:919f43948b4469904dcdb2cc4b1309671be1b9f9b4728a152e6d0d6640b15764
-size 271
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/28_3B5V:
+Evaluated Protein: 28_3B5V
+Number distict solutions: 1
+Designability Fraction: 100.00%
+Novelty Score: 0.0

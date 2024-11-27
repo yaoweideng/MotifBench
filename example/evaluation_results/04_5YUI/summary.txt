@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c0fa0e673b33c94d8ce231de6ec3aa281007967c12b0f1974420c7fa355314d5
-size 266
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/04_5YUI:
+Evaluated Protein: 04_5YUI
+Designability Fraction: 7.00%
+Diversity: 0.29
+Novelty Score: 0.364

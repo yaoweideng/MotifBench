@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b902352719eed6d6f14b3f3cd7e3e705d5c5806870c4996318e611f950d68333
-size 258
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/15_7AD5:
+Evaluated Protein: 15_7AD5
+Designability Fraction: 0.00%
+Diversity: 0.00
+Novelty Score: null

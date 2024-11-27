@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8d4e86b415516a062a681bcc442c9e60087063a8c8fd84d0b4a82f708c65b156
-size 281
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/09_4ZYP:
+Evaluated Protein: 09_4ZYP
+Designability Fraction: 90.00%
+Diversity: 0.10
+Novelty Score: 0.31499999999999995
