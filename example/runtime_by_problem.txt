@@ -1,0 +1,26 @@
+01_1LDB: 55 minutes
+02_1ITU: 76 minutes
+03_5WN9: 35 minutes
+04_6E6R: 54 minutes
+05_6E6R: 117 minutes
+06_7AD5: 55 minutes
+07_7AHO: 42 minutes
+08_7WRK: 43 minutes
+09_2KL8: 25 minutes
+10_4JHW: 49 minutes
+11_5IUS: 38 minutes
+12_7A8S: 54 minutes
+13_7BNY: 27 minutes
+14_7DGW: 26 minutes
+15_7MQQ: 42 minutes
+16_1B73: 42 minutes
+17_1BCF: 26 minutes
+18_1MPY: 56 minutes
+19_1QY3: 80 minutes
+20_2RKX: 84 minutes
+21_3B5V: 39 minutes
+22_4XOJ: 48 minutes
+23_5YUI: 53 minutes
+24_6CPA: 38 minutes
+25_7UWL: 33 minutes
+Average runtime: 49 minutes
