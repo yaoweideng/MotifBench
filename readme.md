@@ -146,6 +146,13 @@ git lfs fetch --all
 git lfs checkout
 ```
 
+Then set the relevant fields in [config.txt](./config.txt).
+
+Using slurm, all jobs may be launched as:
+```
+./scripts/launch_all_slurm.sh config.txt
+```
+
 
 ## Motif Specification Format
 `./parsing/motif_load_and_parse.ipynb` parses the motif problem specifications 
