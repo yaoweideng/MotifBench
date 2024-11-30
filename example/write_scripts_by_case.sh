@@ -7,7 +7,7 @@ example_dir=$benchmark_dir/example/
 motif_dir=$benchmark_dir/motif_pdbs/
 
 csv_path=$example_dir/contig_specifications.csv
-scripts_dir=$example_dir/scripts/run_scripts/
+scripts_dir=$example_dir/run_scripts/
 mkdir -p $scripts_dir
 log_dir=$output_base/logs/
 mkdir -p $log_dir
