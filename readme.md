@@ -6,8 +6,8 @@ Given the coordinates of atoms in a geometry chosen to confer a desired biochemi
 This repository presents the Motif-Scaffolding Benchmark.
 It comprises:
 * [A collection of test cases](#test-cases)
-* [Instructions for preparing and evaluating a set of solutions](#instructions)
-* [An example set of scaffolds and demonstration of the summarized results](#demonstration)
+* [Instructions for preparing and evaluating a set of solutions](#instructions-for-preparing-and-evaluating-a-set-of-solutions)
+* [An example set of scaffolds and demonstration of the summarized results](#demonstration-of-example-set-of-scaffolds-and-evaluation)
 * [A leaderboard of results of motif-scaffolding methods on the benchmark](#leaderboard)
 
 # Test-Cases
@@ -168,7 +168,7 @@ In these files:
 
 ### Instructions for having your results added to the leaderboard
 Results of motif-scaffolding methods will be shared on the github repository upon request.
-To have the results of your method posted, write to \url{btrippe@stanford.edu} or post an issue to the github and include:
+To have the results of your method posted, write to [btrippe@stanford.edu](mailto:btrippe@stanford.edu) or post an issue to the github and include:
  1. Your success rate summary produced by `./scripts/collect_summaries.sh`
  1. A __permanent__ download link from which (1) your submitted scaffold set and (2) all intermediate evaluation results as produced by `./scripts/compile_results.sh` (TODO: write this script!).  We recommend using [Zenodo](https://zenodo.org/) or [Open Science Framework](https://osf.io/). 
  1. A description of the how the scaffolds were genereated.  This could be a link to an arXiv paper or github repository, or an explanation of how an existing approach was used with non-standard settings.}
