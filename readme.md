@@ -5,10 +5,10 @@ Given the coordinates of atoms in a geometry chosen to confer a desired biochemi
 
 This repository presents the Motif-Scaffolding Benchmark.
 It comprises:
-* [A collection of test cases](test-cases)
-* [Instructions for preparing and evaluating a set of solutions](instructions)
-* [An example set of scaffolds and demonstration of the summarized results](demonstration)
-* [A leaderboard of results of motif-scaffolding methods on the benchmark](leaderboard)
+* [A collection of test cases](#test-cases)
+* [Instructions for preparing and evaluating a set of solutions](#instructions)
+* [An example set of scaffolds and demonstration of the summarized results](#demonstration)
+* [A leaderboard of results of motif-scaffolding methods on the benchmark](#leaderboard)
 
 # Test-Cases
 
