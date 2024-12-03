@@ -145,4 +145,3 @@ for filename in os.listdir(motif_pdb_dir):
     filepath = os.path.join(motif_pdb_dir, filename)
     clean_pdb(filepath)
     set_bfactor_to_zero(filepath)
-
