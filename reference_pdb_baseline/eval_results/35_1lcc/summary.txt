@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9ae1cf179ac384ef5333646233eb54870f29c7ca667293bf2d43bf54a3126c46
-size 257
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/35_1lcc:
+Evaluated Protein: 35_1lcc
+Number of distict solutions: 0
+Novelty: null
+Success rate: 0.00%

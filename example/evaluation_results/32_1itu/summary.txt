@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1dfa923059a2df95a93547618148c97e8fda78457e75c7668741c41817eea78a
-size 280
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/32_1itu:
+Evaluated Protein: 32_1itu
+Designability Fraction: 4.00%
+Diversity: 0.50
+Novelty Score: 0.33199999999999996

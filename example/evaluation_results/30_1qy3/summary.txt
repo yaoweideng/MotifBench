@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0a6913e3d224b18e555bdc81db160b21892a0976fcf880a3e77695c620aa480c
-size 265
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/30_1qy3:
+Evaluated Protein: 30_1qy3
+Designability Fraction: 0.00%
+Diversity: 0.00
+Novelty Score: null

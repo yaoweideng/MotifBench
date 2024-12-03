@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b24093fec4b87c49bfebb7a2d71d933782274b466bdcd1fe170f5f7e5e01fbfc
-size 289
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/25_1MPY:
+Evaluated Protein: 25_1MPY
+Number distict solutions: 1
+Designability Fraction: 100.00%
+Novelty Score: 0.0020000000000000018

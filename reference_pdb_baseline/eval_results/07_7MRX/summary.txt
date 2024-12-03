@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b151101f859c6e16d6a5ed9f823a612bbb1dc10888657c73ac2e8dbb2a090270
-size 276
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/07_7MRX:
+Evaluated Protein: 07_7MRX
+Designability Fraction: 100.00%
+Diversity: 1.00
+Novelty Score: 0.007000000000000006

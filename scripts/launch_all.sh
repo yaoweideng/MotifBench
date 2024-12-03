@@ -1,39 +1,24 @@
-#!/usr/bin/bash
-# This script runs evaluate.sh on all motifs in the specified directory.  The
-# evaluation for the next motif is launched whenever a next GPU becomes
-# available.
-
-config_path=$1
+# Check that a motif, and config file are specified
 if [ "$#" -ne 1 ]; then
-    echo "Usage: ./launch_all.sh <config_file_path>"
+    echo "Usage: ./launch_all_slurm.sh <config.txt>"
     exit 1
 fi
+# Source the configuration file
+config_path=$1
+source "$config_path"
 
-gpu_count=8  # Number of GPUs available
-i=0
-results_bb_dir=/home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/
-log_dir=$results_bb_dir/logs/
-mkdir $log_dir
-ls $results_bb_dir | while read l; do
-    # Find an available GPU by checking for processes using each GPU
-    while true; do
-        gpu_id=$((i % gpu_count))
-        
-        # Check if there are any processes running on this GPU
-        if ! nvidia-smi -i $gpu_id | grep -q "No running processes found"; then
-            # If GPU is busy, increment index to check the next GPU
-            i=$((i + 1))
-            sleep 1  # Wait for a second before rechecking
-            continue
-        fi
-
-        # GPU is free; assign job to this GPU and increment index
-        echo "Running $l on GPU $gpu_id"
-        out_fn=$log_dir/$l.out
-        err_fn=$log_dir/$l.err
-        CUDA_VISIBLE_DEVICES=$gpu_id ./evaluate_bbs.sh $l $gpu_id $config_path >$out_fn 2> $err_fn &
-        i=$((i + 1))
-        sleep 60  # Add a small delay before starting the next job
-        break
-    done
+# Ensure necessary variables are set in the config file
+if [ -z "$scaffold_base_dir" ] || [ -z "$foldseek_db_path" ] || [ -z \
+    "$base_output_dir" ] || [ -z "$benchmark_dir" ] ; then
+    echo "Error: Configuration file is missing necessary settings."
+    echo "Ensure it includes 'scaffold_base_dir', 'foldseek_db_path', \
+        'base_output_dir', and 'benchmark_dir'."
+    exit 1
+fi
+log_dir=$base_output_dir/logs/
+mkdir -p $log_dir
+ls $scaffold_base_dir | grep -E '^[0-9]{2}_.{4}$' | while read motif_name; do
+    out_fn=$log_dir/$motif_name.%j.out
+    err_fn=$log_dir/$motif_name.%j.err
+    sbatch --output=$out_fn --error=$err_fn ./evaluate_bbs.sh $motif_name $config_path
 done

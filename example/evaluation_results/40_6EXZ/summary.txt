@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:75da6580f3717a191c48305038f46bc7ed2e1d6d041ea8b0439cda00362a0d69
-size 281
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/40_6EXZ:
+Evaluated Protein: 40_6EXZ
+Designability Fraction: 96.00%
+Diversity: 0.65
+Novelty Score: 0.38349999999999995

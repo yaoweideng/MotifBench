@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bac619f6ab8549fb00fd7068711c337cdbb328c0718c6d6989e8dca44df51393
-size 281
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/22_7S5L:
+Evaluated Protein: 22_7S5L
+Designability Fraction: 66.00%
+Diversity: 0.04
+Novelty Score: 0.29400000000000004

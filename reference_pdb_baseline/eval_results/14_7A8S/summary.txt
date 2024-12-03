@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0332a78a8e96f033542c56f66cc149ca38b316e173a06d3335c838c04a993661
-size 258
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/14_7A8S:
+Evaluated Protein: 14_7A8S
+Number of distict solutions: 1
+Novelty: 0.0
+Success rate: 100.00%

@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0a03863900d2bc3f60d2586eb3fd340fc085ac651e09a903ac0fe8aa5482f475
-size 259
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/05_1YCR:
+Evaluated Protein: 05_1YCR
+Designability Fraction: 100.00%
+Diversity: 1.00
+Novelty Score: 0.0

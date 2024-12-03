@@ -1,4 +1,5 @@
 # Paths configuration
+scaffold_base_dir=
 benchmark_dir=
 foldseek_db_path=
 base_output_dir=

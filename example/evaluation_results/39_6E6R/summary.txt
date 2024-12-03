@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9be212e662a42d373ea645eb8d404905e6fa88b7ebbb1d3065dff19b09abfd8a
-size 267
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/39_6E6R:
+Evaluated Protein: 39_6E6R
+Designability Fraction: 81.00%
+Diversity: 0.94
+Novelty Score: 0.398

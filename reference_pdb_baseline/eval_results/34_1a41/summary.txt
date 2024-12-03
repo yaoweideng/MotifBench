@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:122bbac9de277f1de93f3cb0cb7f7c1532a526a74d1d199e75b2939407e8dfe3
-size 258
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/34_1a41:
+Evaluated Protein: 34_1a41
+Number of distict solutions: 1
+Novelty: 0.0
+Success rate: 100.00%

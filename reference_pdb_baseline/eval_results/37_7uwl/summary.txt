@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ba554ba579a5ab31c1b0b55f770b8f774bde8bae35a1781f1ab37b3fc8571314
-size 257
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/37_7uwl:
+Evaluated Protein: 37_7uwl
+Number of distict solutions: 0
+Novelty: null
+Success rate: 0.00%

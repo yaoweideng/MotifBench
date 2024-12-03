@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a60f1748ca25bc4f01d8fde1ff7f1ac8d026d2c9871a58a65a2dbacaf0b3d83d
-size 281
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/00_1BCF:
+Evaluated Protein: 00_1BCF
+Designability Fraction: 96.87%
+Diversity: 0.01
+Novelty Score: 0.17100000000000004

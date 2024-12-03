@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5341f5f4bd4c30947da7653a2047999305832de5351d7f6a8a472fc142c39d20
-size 267
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/19_7KUW:
+Evaluated Protein: 19_7KUW
+Designability Fraction: 34.00%
+Diversity: 0.12
+Novelty Score: 0.244

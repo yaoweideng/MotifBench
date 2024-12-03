@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 import csv
 import os
@@ -39,7 +38,7 @@ def format_redesign_positions(chain_id, res_nums):
 
 def main():
     if len(sys.argv) != 4:
-        print("Usage: ./write_motifInfo_from_scaffoldInfo.py scaffold_info.csv motif.pdb motif_info.csv")
+        print("Usage: ./write_motifInfo_from_scaffoldInfo.py scaffold_info.csv motif.pdb motif_specs.csv")
         sys.exit(1)
 
     scaffold_info_file = sys.argv[1]
@@ -76,23 +75,22 @@ def main():
 
             # Parse motif_placements into numbers and letters
             parts = motif_placements.strip('/').split('/')
-            numbers = parts[::2]
-            letters = parts[1::2]
 
             # Build segment_order
-            segment_order = ';'.join(letters)
+            segment_order = ';'.join([part[0] for part in parts if
+                part[0].isalpha()])
 
             # Build contig
             contig_parts = []
-            for idx, num in enumerate(numbers):
-                contig_parts.append(num)
-                if idx < len(letters):
-                    letter = letters[idx]
-                    # Get residue numbers for the chain
-                    res_nums = sorted(residue_data.get(letter, {}).keys())
+            for part in parts:
+                if part[0].isalpha():
+                    chain = part[0]
+                    res_nums = sorted(residue_data.get(chain, {}).keys())
                     res_ranges = get_residue_ranges(res_nums)
-                    range_str = ','.join(f"{letter}{r}" for r in res_ranges)
+                    range_str = ','.join(f"{chain}{r}" for r in res_ranges)
                     contig_parts.append(range_str)
+                else:
+                    contig_parts.append(part)
             contig = '/'.join(contig_parts)
 
             # Write to motif_info.csv

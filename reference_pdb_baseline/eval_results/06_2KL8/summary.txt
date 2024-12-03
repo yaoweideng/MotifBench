@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:482b1c5563e0d986ec1858c220f7277f9010614ef4af948f1edfa80aeee8c243
-size 259
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/06_2KL8:
+Evaluated Protein: 06_2KL8
+Designability Fraction: 100.00%
+Diversity: 1.00
+Novelty Score: 0.0

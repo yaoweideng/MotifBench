@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4bc4837845e249da8072c968da55886d380aa28c7580be1bb7fe34fc1121bd5c
-size 281
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/11_5TRV:
+Evaluated Protein: 11_5TRV
+Designability Fraction: 52.53%
+Diversity: 0.27
+Novelty Score: 0.31000000000000005

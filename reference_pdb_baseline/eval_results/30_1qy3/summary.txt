@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8f7821e217777a818939cd9829b58eebd06b8c39cdca91137c4edb1924e7db57
-size 289
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/30_1qy3:
+Evaluated Protein: 30_1qy3
+Number distict solutions: 1
+Designability Fraction: 100.00%
+Novelty Score: 0.0010000000000000009

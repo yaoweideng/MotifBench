@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:662b342cb8948e2973c8faee93584338502537f9a278aad7b7adb07e3d23b8c6
-size 267
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/10_5WN9:
+Evaluated Protein: 10_5WN9
+Designability Fraction: 6.00%
+Diversity: 0.83
+Novelty Score: 0.3145

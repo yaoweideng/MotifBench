@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7217ac586dcee1acb35570050e8fec9d43a9641386d8d6ea8fc1659719211dac
-size 282
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/13_6EXZ:
+Evaluated Protein: 13_6EXZ
+Designability Fraction: 100.00%
+Diversity: 0.09
+Novelty Score: 0.29700000000000004

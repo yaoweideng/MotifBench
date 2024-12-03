@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e231a6926be09a61587017502090a9535a90fea0c1e2ddf4167e73260044907a
-size 275
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/36_5ze9:
+Evaluated Protein: 36_5ze9
+Number of distict solutions: 1
+Novelty: 0.006000000000000005
+Success rate: 100.00%

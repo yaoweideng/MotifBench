@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8aef37e247eea400f3e3322e9781fa117cdf0b29ec9cadadf480e93043ac9fc7
-size 276
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/32_1itu:
+Evaluated Protein: 32_1itu
+Number of distict solutions: 1
+Novelty: 0.0030000000000000027
+Success rate: 100.00%

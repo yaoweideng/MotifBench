@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2fc4970bf94f78a4f6841c064fa8a65e0c9737e75dfdb97e7da407e82c504bda
-size 271
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/27_2RKX:
+Evaluated Protein: 27_2RKX
+Number distict solutions: 1
+Designability Fraction: 100.00%
+Novelty Score: 0.0

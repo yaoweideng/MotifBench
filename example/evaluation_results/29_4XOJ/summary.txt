@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9e8ea2ddc0a7c8f87262dd37dd7a5a2bd8befd290ce58ceb11a2c27b83fdf848
-size 265
+-------------------Summary-------------------
+The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/29_4XOJ:
+Evaluated Protein: 29_4XOJ
+Designability Fraction: 0.00%
+Diversity: 0.00
+Novelty Score: null
