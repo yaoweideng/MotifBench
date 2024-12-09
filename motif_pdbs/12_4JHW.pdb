@@ -1,6 +1,6 @@
 REMARK 1 Reference PDB ID: 4JHW
 REMARK 2 Motif Segment Placement in Reference PDB: 37;A;126;B;301
-REMARK 3 Length for Designed Scaffolds: 125
+REMARK 3 Length for Designed Scaffolds: 100
 ATOM      1  N   UNK A   1       7.920   2.150   7.208  1.00  0.00           N  
 ATOM      2  CA  UNK A   1       8.762   2.340   6.028  1.00  0.00           C  
 ATOM      3  C   UNK A   1       8.266   1.570   4.813  1.00  0.00           C  

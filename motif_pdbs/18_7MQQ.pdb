@@ -1,6 +1,6 @@
 REMARK 1 Reference PDB ID: 7MQQ
 REMARK 2 Motif Segment Placement in Reference PDB: 60;A;20;B;3
-REMARK 3 Length for Designed Scaffolds: 125
+REMARK 3 Length for Designed Scaffolds: 100
 ATOM      1  N   ARG A   1      -5.516   2.427 -12.377  1.00  0.00           N  
 ATOM      2  CA  ARG A   1      -5.227   1.117 -11.804  1.00  0.00           C  
 ATOM      3  C   ARG A   1      -4.497   1.338 -10.488  1.00  0.00           C  
