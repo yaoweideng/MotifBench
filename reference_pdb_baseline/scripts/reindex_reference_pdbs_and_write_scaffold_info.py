@@ -68,7 +68,6 @@ def process_pdb(input_pdb_path, residue_ranges, output_pdb_path):
                 f"{sorted_residues[i - 1]} and {sorted_residues[i]}."
             )
 
-    chain_length = last_residue_index - first_residue_index + 1
 
     # Reindex and relabel the chain to chain A
     reindexed_lines = []
@@ -102,7 +101,7 @@ def process_pdb(input_pdb_path, residue_ranges, output_pdb_path):
         #    padded_regions.append(str(padding_before))
         range_strings.append(f"{padding_before}/{range_labels[idx]}")
         last_end = new_end
-    padding_after = chain_length - last_end
+    padding_after = len(residue_mapping) - last_end
     if padding_after > 0:
         #padded_regions.append(str(padding_after))
         range_strings.append(str(padding_after))
@@ -110,13 +109,13 @@ def process_pdb(input_pdb_path, residue_ranges, output_pdb_path):
     #return "/".join(padded_regions + range_strings)
     return "/".join(range_strings)
 
-def main(motif, residue_ranges):
-    base_dir = "/Users/briantrippe/Dropbox (MIT)/Documents/Stanford/projects/motif_scaffolding_test_cases/"
+def main(base_dir, motif, residue_ranges):
 
     motif_name = motif[3:]
     input_pdb = f"{base_dir}/reference_pdbs/{motif_name}.pdb"
     output_dir = f"{base_dir}/reference_pdb_baseline/{motif}"
-    os.mkdir(output_dir)
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
     output_pdb = f"{output_dir}/{motif}_0.pdb"
     result = process_pdb(input_pdb, residue_ranges, output_pdb)
     scaffold_info_fn = f"{output_dir}/scaffold_info.csv"
@@ -127,10 +126,12 @@ def main(motif, residue_ranges):
     print("Resulting range string:", result)
 
 if __name__ == "__main__":
-    if not len(sys.argv) == 3:
-        print("python reindex_reference_pdbs_and_write_scaffold_info.py <motif> <contig>")
+    if not len(sys.argv) == 4:
+        print("python reindex_reference_pdbs_and_write_scaffold_info.py " 
+                "<benchmark_path> <motif> <contig>")
         sys.exit(1)
 
-    motif = sys.argv[1]
-    residue_ranges = sys.argv[2]
-    main(motif, residue_ranges)
+    benchmark_path = sys.argv[1]
+    motif = sys.argv[2]
+    residue_ranges = sys.argv[3]
+    main(benchmark_path, motif, residue_ranges)

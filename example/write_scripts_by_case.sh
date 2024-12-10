@@ -1,6 +1,6 @@
 #!/bin/bash
 benchmark_dir=/home/users/btrippe/projects/motif_scaffolding_benchmark/
-output_base=/home/groups/btrippe/projects/motif_scaffolding/2024_11_26/rfdiffusion/
+output_base=/home/groups/btrippe/projects/motif_scaffolding/2024_12_10/rfdiffusion/
 model_dir=/home/users/btrippe/projects/motif_scaffolding_benchmark_original/RFDiffusion_baseline/RFdiffusion/models/
 
 example_dir=$benchmark_dir/example/
@@ -12,7 +12,7 @@ mkdir -p $scripts_dir
 log_dir=$output_base/logs/
 mkdir -p $log_dir
 
-cat $csv_path | while read l; do
+cat $csv_path | tail -n +2 | while read l; do
     IFS=',' read -r motif_name length contig <<< "$l"
     contig=`echo $contig | tr ";" "/"`
     script_fn=$scripts_dir/run_$motif_name.sh
@@ -21,10 +21,9 @@ cat $csv_path | while read l; do
     output_prefix=$output_dir/$motif_name
     
     # Command including apptainer call
-    #cmd="echo python3 $path/run_inference.py inference.output_prefix=$output_prefix inference.input_pdb=$motif_dir/$motif_name.pdb contigmap.contigs=[$contig] contigmap.length=$length-$length inference.num_designs=100 inference.model_directory_path=$model_dir inference.write_trajectory=False | bash $path/apptainer_shell.sh" 
     slurm_header="#!/usr/bin/bash
 #SBATCH --time=12:00:00
-#SBATCH -p gpu
+#SBATCH -p owners
 #SBATCH --gpus=1
 #SBATCH -c 4"
     printf "%s\n" "$slurm_header" > $script_fn
