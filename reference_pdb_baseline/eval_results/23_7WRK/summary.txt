@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/23_7WRK:
-Evaluated Protein: 23_7WRK
-Designability Fraction: 100.00%
-Diversity: 1.00
-Novelty Score: 0.007000000000000006

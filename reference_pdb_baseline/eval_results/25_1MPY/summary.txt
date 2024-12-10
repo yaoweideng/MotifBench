@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/25_1MPY:
-Evaluated Protein: 25_1MPY
-Number distict solutions: 1
-Designability Fraction: 100.00%
-Novelty Score: 0.0020000000000000018

@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/27_2RKX:
-Evaluated Protein: 27_2RKX
-Number distict solutions: 1
-Designability Fraction: 100.00%
-Novelty Score: 0.0

@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/01_5TPN:
-Evaluated Protein: 01_5TPN
-Number distict solutions: 0
-Designability Fraction: 0.00%
-Novelty Score: null

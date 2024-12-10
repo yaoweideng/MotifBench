@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_07_reference/08_4JHW:
-Evaluated Protein: 08_4JHW
-Number of distict solutions: 0
-Novelty: null
-Success rate: 0.00%
