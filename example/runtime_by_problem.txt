@@ -24,3 +24,34 @@
 24_6CPA: 38 minutes
 25_7UWL: 33 minutes
 Average runtime: 49 minutes
+01_1LDB: 69 minutes
+02_1ITU: 75 minutes
+03_2CGA: 40 minutes
+04_5WN9: 39 minutes
+05_5ZE9: 40 minutes
+06_6E6R: 44 minutes
+07_6E6R: 54 minutes
+08_7AD5: 47 minutes
+09_7CG5: 47 minutes
+10_7WRK: 47 minutes
+11_3TQB: 47 minutes
+12_4JHW: 57 minutes
+13_4JHW: 79 minutes
+14_5IUS: 57 minutes
+15_7A8S: 53 minutes
+16_7BNY: 56 minutes
+17_7DGW: 86 minutes
+18_7MQQ: 43 minutes
+19_7MQQ: 82 minutes
+20_7UWL: 46 minutes
+21_1B73: 38 minutes
+22_1BCF: 86 minutes
+23_1MPY: 51 minutes
+24_1QY3: 65 minutes
+25_2RKX: 95 minutes
+26_3B5V: 65 minutes
+27_4XOJ: 57 minutes
+28_5YUI: 58 minutes
+29_6CPA: 146 minutes
+30_7UWL: 80 minutes
+Average runtime: 62 minutes
