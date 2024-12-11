@@ -7,10 +7,9 @@ MotifBench is introduced in a [whitepaper](PAPER_LINK_WHEN_READY).
 In this companion repository we provide:
 * [A collection of motif test cases](#test-cases)
 * [Instructions and resources for evaluating evaluation solutions](#evaluation)
-* [Instructions for preparing and evaluating a set of solutions](#instructions-for-preparing-and-evaluating-a-set-of-solutions)
 * [An example set of scaffolds and demonstration of the summarized results](#demonstration-of-example-set-of-scaffolds-and-evaluation)
 * [A leaderboard of results of motif-scaffolding methods on the benchmark](#leaderboard)
-* 
+* [Acknowledgements]
 
 # Test-Cases
 
