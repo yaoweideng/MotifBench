@@ -7,10 +7,9 @@ MotifBench is introduced in a [whitepaper](PAPER_LINK_WHEN_READY).
 In this companion repository we provide:
 * [A collection of motif test cases](#test-cases)
 * [Instructions and resources for evaluating evaluation solutions](#evaluation)
-* [Instructions for preparing and evaluating a set of solutions](#instructions-for-preparing-and-evaluating-a-set-of-solutions)
 * [An example set of scaffolds and demonstration of the summarized results](#demonstration-of-example-set-of-scaffolds-and-evaluation)
 * [A leaderboard of results of motif-scaffolding methods on the benchmark](#leaderboard)
-* 
+* [Acknowledgements](#acknowledgement)
 
 # Test-Cases
 
@@ -207,5 +206,9 @@ We will do our best to update with your results within a week.
 
 
 # Acknowledgement
-This repository wraps [Scaffold-Lab](https://github.com/Immortals-33/Scaffold-Lab) for the benchmark implementation.
-If you use the scripts herein in published research, please attributed credit there as well.
+This repository builds heavily on several existing codebases:
+* [Scaffold-Lab](https://github.com/Immortals-33/Scaffold-Lab) houses the evaluation pipeline.
+* [ProteinMPNN](https://github.com/dauparas/ProteinMPNN) is used for fixed backbone sequence design.
+* [ESMFold](https://github.com/facebookresearch/esm) is used for protein structure prediction.
+* [Foldseek](https://github.com/steineggerlab/foldseek) is used for structural clustering and novelty evaluation.
+If you use the scripts herein in published research, please consider crediting these resources.
