@@ -6,21 +6,15 @@ Given the coordinates of atoms in a geometry chosen to confer a desired biochemi
 MotifBench is introduced in a [whitepaper](PAPER_LINK_WHEN_READY).
 In this companion repository we provide:
 * [A collection of motif test cases](#test-cases)
-* [Instructions and resources for evaluating evaluation solutions](#evaluation)
-* [An example set of scaffolds and demonstration of the summarized results](#demonstration-of-example-set-of-scaffolds-and-evaluation)
-* [A leaderboard of results of motif-scaffolding methods on the benchmark](#leaderboard)
+* [Evaluation instructions with an example](#evaluation)
+* [A performance leaderboard (with submission instructions)](#leaderboard)
 * [Acknowledgements](#acknowledgement)
 
 # Test-Cases
 
 The benchmark test problems are specified in `./motif_specs.csv`, in the table below, and through the pdb files in `./motif_pdbs/`.
 In table below, each row corresponds to a problem in the benchmark.
-The following columns characterize the problems:
-* `PDB ID` The Protein Data Bank identifier of the experimentally characterized structure from which the motif extracted.
-* `Group` The problem group into which the motif is assigned (TODO: describe once grouping is decided).
-* `Length` The number of residues that must required in each scaffold
-* `Motif Residues` The chain ID and indices of residues that comprise the motif.  Discontiguous residue ranges are separated by semicolons.
-* `Positions where residue may be designed` Self explanatory.
+
 
 | #  | PDB ID | Group | Length | Motif Residues                 | Positions where residue may be designed                      | Description                        |
 |----|--------|-------|--------|--------------------------------|-------------------------------------------------------------|------------------------------------|
@@ -55,25 +49,51 @@ The following columns characterize the problems:
 | 29 | 7UWL   | 3     | 175    | E63-73;E101-111                | E63-73;E101-103;E105-111                                   | IL17-RA interface to IL17-RB       |
 | 30 | 7UWL   | 3     | 175    | E63-73;E101-111;E132-142;E165-174 | E63-73;E101-103;E105-111;E132-142;E165-174                 | IL17-RA interface to IL17-RB       |
 
+The following columns characterize the problems:
+* `PDB ID` The Protein Data Bank identifier of the experimentally characterized structure from which the motif extracted.
+* `Group` The problem group into which the motif is assigned (TODO: describe once grouping is decided).
+* `Length` The number of residues that must required in each scaffold
+* `Motif Residues` The chain ID and indices of residues that comprise the motif.  Discontiguous residue ranges are separated by semicolons.
+* `Positions where residue may be designed` The indices of residues within motif segments for which the amino acid type is not constrained to match its identity in the reference protein.  This column is included because in cases where side-chain atoms are not involved in protein function, the motif-scaffolding problem may be made easier by allowing alternative amino acid types to be chosen for these positions during fixed-backbone sequence design.
+
+### Motif pdb files in `./motif_pdbs/`
+We provide a pdb for each benchmark problems in [./motif_pdbs/](./motif_pdbs/) for use as input to motif scaffolding methods.
+These files have been constructed programmatically using `./scripts/download_and_format_motifs.py`, which reads the motif problem specifications in [./motif_specs.csv](./motif_specs.csv), downloads associated experimental structures from [rcsb.org](https://www.rcsb.org/), and parses out data for each motif.
+In these files:
+* Each segment of the motif is labeled as its own chain (i.e. A, B, C, etc).
+* For residues for which the amino acid type may be redesigned, all atoms other than N, CA, C, and O are removed and the residue type is set to unknown (`UNK`).  For residues for which the amino acid type may not be redesigned, side-chain heavy atoms.
+* For convenience, metadata about each problem is also specified in the header of each motif pdb fie.  It includes:
+  *  `Reference PDB ID.` This is the idenitifier associated with the experimental structure from which the motif extracted.
+  *  `Motif Segment Placement in Reference PDB.` This field may provide guidance for methods that require motif placement within designed scaffolds to be specified. However this aspect of a solution may also be chosen (even dynamically) in a problem-specific manner.  For example, for problem 27 (4XOJ) this field is `38;A;43;B;90;C;46`. This obtains because 4XOJ has 223 resolved residues (indexed as 16 through 238), the 38 corresponds to the 38 residues (16-54) before residue 55 (segment A), the 43 corresponds to the residues between residue 55 and 99 and so on. The final 46 indicates that the native structure terminates with 46 additional residues that are not part of the motif.
+  * `Length for Designed Scaffolds.` This again is copied from the `motif_specs.csv` specification that dictates the required length of scaffolds.
+
+
 # Evaluation
 
-Evaluating a collection of scaffolds according to the specification of the benchmark requires several steps
+Evaluating the benchmark requires several steps, described below.
+We provide examples of compatible inputs, example evaluation outputs, and result summaries for download from [Zenodo](https://zenodo.org/) at [zenodo.org/records/14396944](https://zenodo.org/records/14396944).
+This demonstration uses scaffolds generated with [RosettaFold Diffusion](https://github.com/RosettaCommons/RFdiffusion);
+we provide details and scripts used to create this example [here](./example/readme.md) for replicablility.
 
 ### Prepare backbone directory structure and metadata
 
-For each benchmark problem create a directory containing a metadata file and the 100 designed scaffolds.
-* Each scaffold should follow the naming format {test_case}_{sample_number}.pdb, where `test_case` is the concatenation of the problem number and the PDB ID (e.g. `01_1LDB`) and  `sample_number` is 1-indexed (e.g. `01_1LDB_0.pdb, 01_1LDB_1.pdb,...,01_1LDB_99.pdb`).
+For each benchmark problem, create a directory with 100 designed scaffolds as PDB files and a metadata csv file.
+* Each scaffold should follow the naming format `{test_case}_{sample_number}.pdb`, where `{test_case}` is the concatenation of the problem number and the PDB ID (e.g. `01_1LDB`) and  `sample_number` is zero-indexed (e.g. `01_1LDB_0.pdb, 01_1LDB_1.pdb,...,01_1LDB_99.pdb`).
+* The metadata file must be named `scaffold_info.csv` and contain two columns:
+  * `sample_num`: The sample number for each backbone. This should be range from $0$ to $99$. 
+  * `motif_placements`: The order of multiple motif segments in backbones. For example, for a motif with 3 segments (chains `A` and `B` in the motif_pdb file) the string `12/B/15/A/29` indicates that the full backbone chain comprises 12 residues of scaffold, then the residues of motif segment B, then another 15 residues of scaffold, then the residues of motif segment A, and finally another 29 residues of scaffold.  If placement is such that the backbone begins (respectively _ends_) with a motif segment the motif_placements string starts with the motif chain for example as `B/15/A/29` (respectively `12/B/15/A`).
 
+The organize the scaffold and metadata files as below:
 ```bash
-backbone_outputs
-|-- test_case_1/
+scaffolds/
+|-- {test_case_1}/
 |    scaffold_info.csv
 |    {test_case_1}_0.pdb
 |    {test_case_1}_1.pdb
 |    ...
 |    {test_case_1}_99.pdb
 |
-|-- test_case_2/
+|-- {test_case_2}/
 |    scaffold_info.csv
 |    {test_case_2}_0.pdb
 |    {test_case_2}_1.pdb
@@ -85,27 +105,15 @@ backbone_outputs
 |-- test_case_30/
 |  ...
 ```
+Find an example obeying these conventions in `scaffolds.zip` at [zenodo.org/records/14396944](https://zenodo.org/records/14396944).
 
-The metadata file should be named `scaffold_info.csv` and contain two columns:
-* `sample_num`: The sample number for each backbone. This should be range from $1$ to $100$. 
-* `motif_placements`: The order of multiple motif segments in backbones. For example, for a motif with 3 segments the string `12/A/6/C/29/B/17` would indicate that pdb file with the following:
-  * First 12 residues of scaffold
-  * followed by motif segment A
-  * followed by 6 residues of scaffiold
-  * followed by motif semgent C
-  * followed by 29 residues of scaffold
-  * followed by motif segment B
-  * terminating with 17 residues of scaffold.
-
-### Evaluate each scaffold set independently
-
+### Install required packages and Foldseek database
+To evaluation benchmark peformance on scaffolds assembled as described above, first download the repo and install necessary requirements.
 ```
-# Clone the benchmark repo
+# Clone the benchmark repo and install 
 git clone git@github.com:blt2114/motif_scaffolding_benchmark.git
 cd motif_scaffolding_benchmark
-```
 
-```
 # Create and activate environment
 conda env create -f motif_bench.yml
 conda activate motif_bench
@@ -119,22 +127,37 @@ pip install -e Scaffold-Lab
 
 For novelty evaluation, the Foldseek PDB database is required.
 ```
-foldseek_pdb_database_path=./pdb
+foldseek_pdb_database_path=<desired_path_for_foldseek_database>
 mkdir $foldseek_pdb_database_path
 cd $foldseek_pdb_database_path
 foldseek databases PDB pdb tmp
 ```
 
-Next, several paths must be specified in a configuration file [config.txt](config.txt) which is given as an input to the evaluation script.
+### Run the benchmark and compile result summaries
+Next, several paths must be specified in a configuration file [config.txt](config.txt), which will given as an input to the evaluation script.
 ```
 # Paths configuration
-scaffold_base_dir=<path/to/backbone_outputs/> # Directory with your scaffolds to benchmark, organized as above
+scaffold_base_dir=<path/to/scaffolds/> # Directory with your scaffolds to benchmark, organized as above
 benchmark_dir=<path/to/motif_scaffolding_benchmark/> # Location of this code repository
 foldseek_db_path=</path/to/foldseek/pdb_database/pdb> # Same as $foldseek_pdb_database_path above
 base_output_dir=</path/to/eval_results_dir/> # Location to write evaluation results
 ```
 
-Then from the repository directory run the evaluation script:
+As a demonstration you can download and run the benchmark evaluation of RFdiffusion scaffolds by downloading our example case:
+```
+# In the benchmark repository directory, download example scaffolds from zenodo
+wget https://zenodo.org/records/14396944/files/scaffolds.zip
+unzip scaffolds.zip
+
+# Write paths to config.txt
+echo scaffold_base_dir=`pwd`/scaffolds/ > config.txt
+echo benchmark_dir=`pwd`/ >> config.txt
+echo foldseek_db_path=$foldseek_pdb_database_path >> config.txt
+echo base_output_dir=`pwd`/evaluation/ >> config.txt
+```
+
+Run the evaluation script from the benchmark repository directory.
+This step requires about one GPU-day.
 ```
 # Run the evaluation for each problem in sequence on one machine / GPU
 ls motif_pdbs/ | while read motif; do
@@ -145,51 +168,24 @@ done
 ./scripts/launch_all.sh config.txt
 ```
 
-Running the benchmark requires about one GPU-day.  (TODO: say something about GPU type and memory requirements!)
-Finally compile results as 
+Finally, compile results as:
 ```
 ./scripts/summarize_results.sh config.txt
 ```
-
 Summary results are written to the <base_output_dir> specified in your config file both by problem (`summary_by_problem.csv`) and by group (`summary_by_group.csv`).
-For example for the RFdiffusion example, we can view results by group as:
+Example summary files are provided on Zenodo.
+
+For example, for the RFdiffusion example, we can view results by group as:
 ```
-> cat rfdiffusion_eval/summary_by_group.csv | column -s, -t 
+> wget https://zenodo.org/records/14396944/files/evaluation_summaries.zip
+> unzip evaluation_summaries.zip
+> cat evaluation_summaries/summary_by_group.csv | column -s, -t 
 Group  Number_Solved  Mean_Num_Solutions  Mean_Novelty  Mean_Success_rate
 1      6              11.40               0.19          27.30
 2      6              0.80                0.20          19.90
 3      1              0.40                0.07          2.00
 ```
 
-
-## Demonstration of example set of scaffolds and evaluation
-We have included an example collection of scaffolds for all benchmark problems produced by [RosettaFold Diffusion](https://github.com/RosettaCommons/RFdiffusion) in [./example/rfdiffusion_test_run/](./example/rfdiffusion_test_run/).
-Further information is provided in [here](./example/readme.md).
-
-To run the evaluation you must first download the files. 
-These are stored with `git-lfs`
-which must be installed (see instructions [here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage).
-```
-git lfs fetch --all
-git lfs checkout
-```
-
-Then set the relevant fields in [config.txt](./config.txt).
-
-Using slurm, all jobs may be launched as:
-```
-./scripts/launch_all.sh config.txt
-```
-
-
-## Motif Specification Format
-`./parsing/motif_load_and_parse.ipynb` parses the motif problem specifications 
-writes out target motifs as `.pdb` files to be used as input for motif scaffolding methods.
-In these files:
-* Each segment of the motif is labeled as its own chain (i.e. A, B, C, etc).
-* For residues for which the amino acid type may be redesigned, all atoms other than N, CA, C, and O are removed and the residue type is set to unknown (`UNK`).  Side-chain heavy atoms are included for other residues.
-* The header of the motif includes a contig specifying how the motif is placed in the native scaffold. This header can provide guidance for methods that require the length of a scaffold and the order and placement of the motif to be specified. However this aspect of a solution may also be chosen (even dynamically) in a problem-specific manner.
-  * Example: for motif specification `4xoj,A55;A99;A190-192,A191` the header contig is `38;A;43;B;90;C;46`. This obtains because 4xoj has 223 resolved residues (indexed as 16 through 238), the 38 corresponds to the 38 residues (16-54) before residue 55 (segment A), the 43 corresponds to the residues between residue 55 and 99 and so on. The final 46 indicates that the native structure terminates with 46 additional residues that are not part of the motif.
 
 # Leaderboard
 ## TODO: create leaderboard and add in RFDiffusion results.
@@ -198,11 +194,11 @@ In these files:
 Results of motif-scaffolding methods will be shared on the github repository upon request.
 To have the results of your method posted, write to [btrippe@stanford.edu](mailto:btrippe@stanford.edu) or post an issue to the github and include:
  1. Your success rate summary produced by `./scripts/collect_summaries.sh`
- 1. A __permanent__ download link from which (1) your submitted scaffold set and (2) all intermediate evaluation results as produced by `./scripts/compile_results.sh` (TODO: write this script!).  We recommend using [Zenodo](https://zenodo.org/) or [Open Science Framework](https://osf.io/). 
- 1. A description of the how the scaffolds were genereated.  This could be a link to an arXiv paper or github repository, or an explanation of how an existing approach was used with non-standard settings.}
- 1. A description of the compute resources used to generating backbones (e.g.\ ``about 50 GPU hours across a variety of node types on the university cluster'') }
+ 1. A __permanent__ download link including (1) your submitted scaffold set, (2) the full evaluation results, and (3) summary results as produced by `./scripts/summarize_results.sh`.  We recommend using [Zenodo](https://zenodo.org/) or [Open Science Framework](https://osf.io/) for saving these results.
+ 1. A description of the how the scaffolds were generated.  This could be a link to an arXiv paper or github repository, or an explanation of how an existing approach (e.g. with what default or non-default settings).}
+ 1. A description of the compute resources used to generating backbones (e.g. "about 50 GPU hours across a variety of node types on a university cluster") }
  1. A contact name and email address to be posted with your results.
-We will do our best to update with your results within a week.
+We will do our best to update this page with your results within a week.
 
 
 # Acknowledgement
