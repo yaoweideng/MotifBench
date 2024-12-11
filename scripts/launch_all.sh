@@ -20,5 +20,5 @@ mkdir -p $log_dir
 ls $scaffold_base_dir | grep -E '^[0-9]{2}_.{4}$' | while read motif_name; do
     out_fn=$log_dir/$motif_name.%j.out
     err_fn=$log_dir/$motif_name.%j.err
-    sbatch --output=$out_fn --error=$err_fn ./evaluate_bbs.sh $motif_name $config_path
+    sbatch --output=$out_fn --error=$err_fn $benchmark_dir/scripts/evaluate_bbs.sh $motif_name $config_path
 done
