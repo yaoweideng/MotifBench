@@ -1,14 +1,16 @@
-# Motif-Scaffolding Benchmark (MSB)
-
+# MotifBench V1.0
+MotifBench is a standardized protein design benchmark for motif-scaffolding problems.
 The motif-scaffolding problem is a central task in computational protein design:
-Given the coordinates of atoms in a geometry chosen to confer a desired biochemical function (a motif), the task is to identify diverse protein structures (scaffolds) that include the motif and maintain its geometry.
+Given the coordinates of atoms in a geometry chosen to confer a desired biochemical function (a motif), the goal is to identify diverse protein structures (scaffolds) that include the motif and stabilize its geometry.
 
-This repository presents the Motif-Scaffolding Benchmark.
-It comprises:
-* [A collection of test cases](#test-cases)
+MotifBench is introduced in a [whitepaper](PAPER_LINK_WHEN_READY).
+In this companion repository we provide:
+* [A collection of motif test cases](#test-cases)
+* [Instructions and resources for evaluating evaluation solutions](#evaluation)
 * [Instructions for preparing and evaluating a set of solutions](#instructions-for-preparing-and-evaluating-a-set-of-solutions)
 * [An example set of scaffolds and demonstration of the summarized results](#demonstration-of-example-set-of-scaffolds-and-evaluation)
 * [A leaderboard of results of motif-scaffolding methods on the benchmark](#leaderboard)
+* 
 
 # Test-Cases
 
@@ -54,35 +56,34 @@ The following columns characterize the problems:
 | 29 | 7UWL   | 3     | 175    | E63-73;E101-111                | E63-73;E101-103;E105-111                                   | IL17-RA interface to IL17-RB       |
 | 30 | 7UWL   | 3     | 175    | E63-73;E101-111;E132-142;E165-174 | E63-73;E101-103;E105-111;E132-142;E165-174                 | IL17-RA interface to IL17-RB       |
 
+# Evaluation
 
-# Instructions for preparing and evaluating a set of solutions
-
-Evaluating a collection of scaffolds according to the specification of the benchmark requires several steps:
+Evaluating a collection of scaffolds according to the specification of the benchmark requires several steps
 
 ### Prepare backbone directory structure and metadata
 
 For each benchmark problem create a directory containing a metadata file and the 100 designed scaffolds.
-* Each scaffold should follow the naming format {test_case}_{sample_number}.pdb, where `test_case` is the concatenation of the problem number and the PDB ID (e.g. `01_1BCF`) and  `sample_number` is 1-indexed (e.g. `1_1BCF_1.pdb, 01_1BCF_2.pdb,...,01_1BCF_100.pdb`).
+* Each scaffold should follow the naming format {test_case}_{sample_number}.pdb, where `test_case` is the concatenation of the problem number and the PDB ID (e.g. `01_1LDB`) and  `sample_number` is 1-indexed (e.g. `01_1LDB_0.pdb, 01_1LDB_1.pdb,...,01_1LDB_99.pdb`).
 
 ```bash
 backbone_outputs
 |-- test_case_1/
 |    scaffold_info.csv
+|    {test_case_1}_0.pdb
 |    {test_case_1}_1.pdb
-|    {test_case_1}_2.pdb
 |    ...
-|    {test_case_1}_100.pdb
+|    {test_case_1}_99.pdb
 |
 |-- test_case_2/
 |    scaffold_info.csv
+|    {test_case_2}_0.pdb
 |    {test_case_2}_1.pdb
-|    {test_case_2}_2.pdb
 |    ...
-|    {test_case_2}_100.pdb
+|    {test_case_2}_99.pdb
 |
 | ....
 |
-|-- test_case_25/
+|-- test_case_30/
 |  ...
 ```
 
@@ -99,39 +100,67 @@ The metadata file should be named `scaffold_info.csv` and contain two columns:
 
 ### Evaluate each scaffold set independently
 
-
-The workhorse benchmarking evaluation steps are implemented in [Scaffold-Lab](https://github.com/Immortals-33/Scaffold-Lab), which must first be installed:
 ```
-# Clone the repo and submodule
-git clone --recurse-submodules git@github.com:blt2114/motif_scaffolding_benchmark.git
+# Clone the benchmark repo
+git clone git@github.com:blt2114/motif_scaffolding_benchmark.git
+cd motif_scaffolding_benchmark
+```
 
-TODO: SCAFFOLD_LAB INSTALL STEPS from Readme
+```
+# Create and activate environment
+conda env create -f motif_bench.yml
+conda activate motif_bench
+```
+
+The workhorse benchmarking evaluation steps are implemented in [Scaffold-Lab](https://github.com/Immortals-33/Scaffold-Lab).
+```
+# Install Scaffold-lab into your conda environment
+pip install -e Scaffold-Lab
+```
+
+For novelty evaluation, the Foldseek PDB database is required.
+```
+foldseek_pdb_database_path=./pdb
+mkdir $foldseek_pdb_database_path
+cd $foldseek_pdb_database_path
+foldseek databases PDB pdb tmp
 ```
 
 Next, several paths must be specified in a configuration file [config.txt](config.txt) which is given as an input to the evaluation script.
 ```
 # Paths configuration
-benchmark_dir=
-foldseek_db_path=
-base_output_dir=
+scaffold_base_dir=<path/to/backbone_outputs/> # Directory with your scaffolds to benchmark, organized as above
+benchmark_dir=<path/to/motif_scaffolding_benchmark/> # Location of this code repository
+foldseek_db_path=</path/to/foldseek/pdb_database/pdb> # Same as $foldseek_pdb_database_path above
+base_output_dir=</path/to/eval_results_dir/> # Location to write evaluation results
 ```
 
-Then from the repository directory run the evaluation script on a single example as:
+Then from the repository directory run the evaluation script:
 ```
-./scripts/evaluate_bbs.sh 16_7AHO 0 config.txt
-```
+# Run the evaluation for each problem in sequence on one machine / GPU
+ls motif_pdbs/ | while read motif; do
+    ./scripts/evaluate_bbs.sh $motif config.txt
+done
 
-Or run on the whole set of scaffolds as:
-```
+# Or run on the whole set of scaffolds in parallel on a Slurm cluster
 ./scripts/launch_all.sh config.txt
 ```
 
-Then compile results as 
+Running the benchmark requires about one GPU-day.  (TODO: say something about GPU type and memory requirements!)
+Finally compile results as 
 ```
-./scripts/launch_all.sh
+./scripts/summarize_results.sh config.txt
 ```
 
-TODO say something about metrics that are saved and show a summary output...
+Summary results are written to the <base_output_dir> specified in your config file both by problem (`summary_by_problem.csv`) and by group (`summary_by_group.csv`).
+For example for the RFdiffusion example, we can view results by group as:
+```
+> cat rfdiffusion_eval/summary_by_group.csv | column -s, -t 
+Group  Number_Solved  Mean_Num_Solutions  Mean_Novelty  Mean_Success_rate
+1      6              11.40               0.19          27.30
+2      6              0.80                0.20          19.90
+3      1              0.40                0.07          2.00
+```
 
 
 ## Demonstration of example set of scaffolds and evaluation
@@ -150,7 +179,7 @@ Then set the relevant fields in [config.txt](./config.txt).
 
 Using slurm, all jobs may be launched as:
 ```
-./scripts/launch_all_slurm.sh config.txt
+./scripts/launch_all.sh config.txt
 ```
 
 
