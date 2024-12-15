@@ -46,7 +46,7 @@ def load_pdb(pdb_id, reference_pdb_dir="./reference_pdbs/"):
         urllib.request.urlretrieve(f"http://files.rcsb.org/download/{pdb_id}.pdb", pdb_fn)
     else:
         # If 1QY3, use modified pdb file with reversion of R96A mutation.
-        pdb_fn = "../test_cases/ESM3/1qy3_A96R.pdb"
+        pdb_fn = "../reference_pdbs/1QY3_A96R.pdb"
     parser = PDBParser()
     return parser.get_structure(pdb_id, pdb_fn)
 
@@ -112,13 +112,13 @@ def save_motif_pdb(motif_string, motif_pdb_dir="./motif_pdbs/", reference_pdb_di
         f.seek(0, 0)
         f.write(header + content)
 
-motif_specs_path = "../motif_specs.csv"
+test_cases_path = "../test_cases.csv"
 motif_pdb_dir = "../motif_pdbs/"
 reference_pdb_dir = "../reference_pdbs/"
 os.makedirs(motif_pdb_dir, exist_ok=True)
 os.makedirs(reference_pdb_dir, exist_ok=True)
 
-with open(motif_specs_path, "r") as f:
+with open(test_cases_path, "r") as f:
     f.readline()
     for idx, line in enumerate(f):
         save_motif_pdb(line.strip(), motif_pdb_dir, reference_pdb_dir, idx + 1)

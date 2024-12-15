@@ -54,4 +54,5 @@ $python_path $benchmark_dir/Scaffold-Lab/scaffold_lab/motif_scaffolding/motif_re
     inference.backbone_pdb_dir=$bb_dir \
     inference.motif_pdb=$motif_pdb_path \
     inference.output_dir=$output_dir \
-    evaluation.foldseek_database=$foldseek_db_path
+    evaluation.foldseek_database=$foldseek_db_path \
+    inference.force_motif_AA_type=True

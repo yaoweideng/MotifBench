@@ -34,6 +34,6 @@ ls $base_output_dir/*/esm_summary.txt | while IFS= read -r summary_file; do
 done
 echo "Summary results by case written to " $summary_by_case_fn
 
-motif_specs_fn=$benchmark_dir/motif_specs.csv
-python $benchmark_dir/scripts/write_summary_by_group.py $motif_specs_fn $summary_by_case_fn $summary_by_group_fn
+test_cases_fn=$benchmark_dir/test_cases.csv
+python $benchmark_dir/scripts/write_summary_by_group.py $test_cases_fn $summary_by_case_fn $summary_by_group_fn
 echo "Summary results by gorup written to " $summary_by_group_fn

@@ -1,12 +1,12 @@
 import pandas as pd
 import argparse
 
-def main(motif_specs_file, summary_by_case_file, summary_by_group_file):
+def main(test_cases_file, summary_by_case_file, summary_by_group_file):
     # Load the input files
-    motif_specs = pd.read_csv(motif_specs_file)
-    motif_specs['idx'] = [i+1 for i in range(len(motif_specs))]     
+    test_cases = pd.read_csv(test_cases_file)
+    test_cases['idx'] = [i+1 for i in range(len(test_cases))]     
     group_by_idx = {row[1]["idx"]:row[1]['group'] for row in
-            motif_specs.iterrows()}
+            test_cases.iterrows()}
     summary_by_case = pd.read_csv(summary_by_case_file)
     summary_by_case['group'] = [group_by_idx[int(row[1]['Problem'].split("_")[0])]
             for row in summary_by_case.iterrows()]
@@ -27,12 +27,12 @@ def main(motif_specs_file, summary_by_case_file, summary_by_group_file):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Process motif_specs and summary_by_case files to generate group-level statistics.")
-    parser.add_argument("motif_specs_file", help="Path to the motif_specs.csv file")
+    parser = argparse.ArgumentParser(description="Process test_cases and summary_by_case files to generate group-level statistics.")
+    parser.add_argument("test_cases_file", help="Path to the test_cases.csv file")
     parser.add_argument("summary_by_case_file", help="Path to the summary_by_case.csv file")
     parser.add_argument("summary_by_group_file", help="Path to the summary_by_group.csv file")
 
     args = parser.parse_args()
 
-    main(args.motif_specs_file, args.summary_by_case_file,
+    main(args.test_cases_file, args.summary_by_case_file,
             args.summary_by_group_file)

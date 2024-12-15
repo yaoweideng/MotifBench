@@ -38,7 +38,7 @@ def format_redesign_positions(chain_id, res_nums):
 
 def main():
     if len(sys.argv) != 4:
-        print("Usage: ./write_motifInfo_from_scaffoldInfo.py scaffold_info.csv motif.pdb motif_specs.csv")
+        print("Usage: ./write_motifInfo_from_scaffoldInfo.py scaffold_info.csv motif.pdb test_cases.csv")
         sys.exit(1)
 
     scaffold_info_file = sys.argv[1]

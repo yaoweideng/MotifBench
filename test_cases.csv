@@ -1,4 +1,4 @@
-motif,contig,redesign_idcs,length,group
+pdb_id,motif_residues,redesign_idcs,length,group
 1LDB,A186-206,,125,1
 1ITU,A124-147,,150,1
 2CGA,A184-194,,125,1
