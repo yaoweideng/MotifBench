@@ -27,7 +27,7 @@ source "$config_file"
 
 # Ensure necessary variables are set in the config file
 if [ -z "$scaffold_base_dir" ] || [ -z "$foldseek_db_path" ] || [ -z \
-    "$base_output_dir" ] || [ -z "$benchmark_dir" ] ; then
+    "$base_output_dir" ] || [ -z "$benchmark_dir" ] || [ -z "$python_path" ] ; then
     echo "Error: Configuration file is missing necessary settings."
     echo "Ensure it includes 'scaffold_base_dir', 'foldseek_db_path', \
         'base_output_dir', and 'benchmark_dir'."
@@ -45,26 +45,11 @@ fi
 
 # Make motif_info.csv from scaffold_info.csv
 motif_pdb_path=$benchmark_dir/motif_pdbs/$motif_name".pdb"
-python $benchmark_dir/scripts/write_motifInfo_from_scaffoldInfo.py \
+$python_path $benchmark_dir/scripts/write_motifInfo_from_scaffoldInfo.py \
     $bb_dir/scaffold_info.csv $motif_pdb_path $bb_dir/motif_info.csv
 
 # Run Scaffold-Lab for evaluation
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/groups/btrippe/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/groups/btrippe/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/groups/btrippe/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/groups/btrippe/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-conda activate scl
-python $benchmark_dir/Scaffold-Lab/scaffold_lab/motif_scaffolding/motif_refolding.py \
+$python_path $benchmark_dir/Scaffold-Lab/scaffold_lab/motif_scaffolding/motif_refolding.py \
     inference.motif_csv_path=$bb_dir/motif_info.csv \
     inference.backbone_pdb_dir=$bb_dir \
     inference.motif_pdb=$motif_pdb_path \
