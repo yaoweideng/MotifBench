@@ -14,12 +14,11 @@ In this companion repository we provide:
 
 The benchmark includes 30 test problems that are specified in `./test_cases.csv`, and through the pdb files in `./motif_pdbs/`.
 In this csv, each row defines a test case, The following columns characterize the problems:
-* 	contig	redesign_idcs	length	group
-* `motif` The Protein Data Bank identifier of the experimentally characterized structure from which the motif extracted.
-* `Group` The problem group into which the motif is assigned (TODO: describe once grouping is decided).
-* `Length` The number of residues that must required in each scaffold
-* `Motif Residues` The chain ID and indices of residues that comprise the motif.  Discontiguous residue ranges are separated by semicolons.
-* `Positions where residue may be designed` The indices of residues within motif segments for which the amino acid type is not constrained to match its identity in the reference protein.  This column is included because in cases where side-chain atoms are not involved in protein function, the motif-scaffolding problem may be made easier by allowing alternative amino acid types to be chosen for these positions during fixed-backbone sequence design.
+* `pdb_id` The Protein Data Bank identifier of the experimentally characterized structure from which the motif extracted.
+* `motif_residues` The chain ID and indices of residues that comprise the motif.  Discontiguous residue ranges are separated by semicolons.
+* `redesign_idcs` The indices of residues within motif segments for which the amino acid type is not constrained to match its identity in the reference protein, and will be "redesigned" during inverse-folding.  This column is included because in cases where side-chain atoms are not involved in protein function, the motif-scaffolding problem may be made easier by allowing alternative amino acid types to be chosen for these positions during fixed-backbone sequence design.
+* `length` The number of residues required in each scaffold.
+* `group` The problem group into which the motif is assigned.  This grouping is defined based on the number of contiguous segments that comprise the motif: group 1 motifs have only one segment, group 2 motifs have 2 segments, and group 3 motifs have 3 or more segments.
 
 ### Motif pdb files in `./motif_pdbs/`
 We provide a pdb for each benchmark problems in [./motif_pdbs/](./motif_pdbs/) for use as input to motif scaffolding methods.
