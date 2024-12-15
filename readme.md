@@ -141,6 +141,7 @@ scaffold_base_dir=<path/to/scaffolds/> # Directory with your scaffolds to benchm
 benchmark_dir=<path/to/motif_scaffolding_benchmark/> # Location of this code repository
 foldseek_db_path=</path/to/foldseek/pdb_database/pdb> # Same as $foldseek_pdb_database_path above
 base_output_dir=</path/to/eval_results_dir/> # Location to write evaluation results
+python_path=</path/to/conda/env/python> # Location of python executable
 ```
 
 As a demonstration you can download and run the benchmark evaluation of RFdiffusion scaffolds by downloading our example case:
@@ -154,6 +155,7 @@ echo scaffold_base_dir=`pwd`/scaffolds/ > config.txt
 echo benchmark_dir=`pwd`/ >> config.txt
 echo foldseek_db_path=$foldseek_pdb_database_path >> config.txt
 echo base_output_dir=`pwd`/evaluation/ >> config.txt
+echo python_path=`which python` # With conda environment activated
 ```
 
 Run the evaluation script from the benchmark repository directory.
