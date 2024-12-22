@@ -35,5 +35,5 @@ done
 echo "Summary results by case written to " $summary_by_case_fn
 
 test_cases_fn=$benchmark_dir/test_cases.csv
-python $benchmark_dir/scripts/write_summary_by_group.py $test_cases_fn $summary_by_case_fn $summary_by_group_fn
+$python_path $benchmark_dir/scripts/write_summary_by_group.py $test_cases_fn $summary_by_case_fn $summary_by_group_fn
 echo "Summary results by gorup written to " $summary_by_group_fn
