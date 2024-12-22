@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import argparse
 
 def main(test_cases_file, summary_by_case_file, summary_by_group_file):
@@ -21,6 +22,15 @@ def main(test_cases_file, summary_by_case_file, summary_by_group_file):
 
     # Rename columns to match the specified format
     summary_by_group.rename(columns={'group': 'Group'}, inplace=True)
+
+    # Add summary column with that incorporates information across groups
+    summary_by_group.loc[len(summary_by_group)] = {
+        "Group": "overall",
+        "Number_Solved": np.sum(summary_by_group["Number_Solved"]),
+        "Mean_Num_Solutions": np.mean(summary_by_group["Mean_Num_Solutions"]),
+        "Mean_Novelty": np.mean(summary_by_group["Mean_Novelty"]),
+        "Mean_Success_rate": np.mean(summary_by_group["Mean_Success_rate"]),
+    }
 
     # Save the output to a new CSV file
     summary_by_group.to_csv(summary_by_group_file, float_format='%.2f', index=False)
