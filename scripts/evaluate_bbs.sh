@@ -55,4 +55,8 @@ $python_path $benchmark_dir/Scaffold-Lab/scaffold_lab/motif_scaffolding/motif_re
     inference.motif_pdb=$motif_pdb_path \
     inference.output_dir=$output_dir \
     evaluation.foldseek_database=$foldseek_db_path \
-    inference.force_motif_AA_type=True
+    inference.force_motif_AA_type=True \
+    inference.pmpnn_dir=$benchmark_dir/Scaffold-Lab/tools/ProteinMPNN/ \
+    evaluation.assist_protein=$benchmark_dir/Scaffold-Lab/tools/assistant_protein/assist_protein.pdb \
+
+
