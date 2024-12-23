@@ -101,10 +101,10 @@ foldseek databases PDB pdb tmp
 Next, several paths must be specified in a configuration file [config.txt](config.txt), which will given as an input to the evaluation script.
 ```
 # Paths configuration
-scaffold_base_dir=<path/to/scaffolds/> # Directory with your scaffolds to benchmark, organized as above
-benchmark_dir=<path/to/motif_scaffolding_benchmark/> # Location of this code repository
+scaffold_base_dir=<path/to/scaffolds> # Directory with your scaffolds to benchmark, organized as above
+benchmark_dir=<path/to/motif_scaffolding_benchmark> # Location of this code repository
 foldseek_db_path=</path/to/foldseek/pdb_database/pdb> # Same as $foldseek_pdb_database_path above
-base_output_dir=</path/to/eval_results_dir/> # Location to write evaluation results
+base_output_dir=</path/to/eval_results_dir> # Location to write evaluation results
 python_path=</path/to/conda/env/python> # Location of python executable
 ```
 
@@ -115,18 +115,18 @@ wget https://zenodo.org/records/14396944/files/scaffolds.zip
 unzip scaffolds.zip
 
 # Write paths to config.txt
-echo scaffold_base_dir=`pwd`/scaffolds/ > config.txt
-echo benchmark_dir=`pwd`/ >> config.txt
+echo scaffold_base_dir=`pwd`/scaffolds > config.txt
+echo benchmark_dir=`pwd` >> config.txt
 echo foldseek_db_path=$foldseek_pdb_database_path >> config.txt
-echo base_output_dir=`pwd`/evaluation/ >> config.txt
-echo python_path=`which python` # With conda environment activated
+echo base_output_dir=`pwd`/evaluation >> config.txt
+echo python_path=`which python` >> config.txt # With conda environment activated
 ```
 
 Run the evaluation script from the benchmark repository directory.
 This step requires about one GPU-day.
 ```
 # Run the evaluation for each problem in sequence on one machine / GPU
-ls motif_pdbs/ | while read motif; do
+ls motif_pdbs/ | sed 's/\.pdb$//' | while read motif; do
     ./scripts/evaluate_bbs.sh $motif config.txt
 done
 
