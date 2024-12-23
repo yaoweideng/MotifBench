@@ -11,12 +11,11 @@ source "$config_path"
 # Ensure scaffold_base_dir is defined
 if [ -z "$scaffold_base_dir" ] ; then 
     echo "Error: Configuration file is missing necessary settings."
-    echo "Ensure it includes 'scaffold_base_dir', 'foldseek_db_path', \
-        'base_output_dir', and 'benchmark_dir'."
+    echo "Ensure it includes 'scaffold_base_dir' and 'python_path"
     exit 1
 fi
 
 ls $scaffold_base_dir | while read l; do
-	python write_scaffold_info.py $scaffold_base_dir/$l $scaffold_base_dir/$l/scaffold_info.csv contig_specifications.csv
+	$python_path write_scaffold_info.py $scaffold_base_dir/$l $scaffold_base_dir/$l/scaffold_info.csv contig_specifications.csv
 done
 

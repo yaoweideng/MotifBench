@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Check if a file path is provided as an argument
-if [ "$#" -ne 3 ]; then
-  echo "Usage: $0 config.txt RFdiffusion_dir/ Docker_dir/"
+if [ "$#" -ne 4 ]; then
+  echo "Usage: $0 config.txt RFdiffusion_dir/ Docker_dir/ rep"
   exit 1
 fi
 
@@ -16,15 +16,16 @@ if [ -z "$scaffold_base_dir" ] || [ -z "$benchmark_dir" ] ; then
 fi
 
 RFdiffusion_dir=$2
-Docker_dir=$2
+Docker_dir=$3
+rep=$4
 
-model_dir=$Docker_dir/models/
+model_dir=$RFdiffusion_dir/models/
 
 example_dir=$benchmark_dir/example/
 motif_dir=$benchmark_dir/motif_pdbs/
 
 csv_path=$example_dir/contig_specifications.csv
-scripts_dir=$example_dir/run_scripts/
+scripts_dir=$example_dir/run_scripts/rep_$rep/
 mkdir -p $scripts_dir
 log_dir=$scaffold_base_dir/logs/
 mkdir -p $log_dir
@@ -53,7 +54,7 @@ cat $csv_path | tail -n +2 | while read l; do
       --bind \$base_dir/inputs:\$base_dir/inputs \\
       --bind \$base_dir/outputs:\$base_dir/outputs \\
       \$docker_sifs_path/rfdiffusion.sif \\
-      python3 $RFdiffusion_dir/scripts/run_inference.py \\
+      python3 $example_dir/run_inference.py \\
             inference.output_prefix=$output_prefix \\
             inference.input_pdb=$motif_dir/$motif_name.pdb \\
             contigmap.contigs=[$contig] \\
