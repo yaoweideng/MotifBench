@@ -131,7 +131,7 @@ ls motif_pdbs/ | sed 's/\.pdb$//' | while read motif; do
 done
 
 # Or run on the whole set of scaffolds in parallel on a Slurm cluster
-./scripts/launch_all.sh config.txt esmfold
+./scripts/launch_all.sh config.txt
 ```
 
 Finally, compile results as:
