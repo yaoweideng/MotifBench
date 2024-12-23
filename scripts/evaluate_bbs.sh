@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 #SBATCH --time=12:00:00
-#SBATCH -p gpu
+#SBATCH -p owners
 #SBATCH --gpus=1
 #SBATCH -c 4
 #SBATCH --mem=128GB
