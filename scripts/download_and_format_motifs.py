@@ -40,13 +40,13 @@ def remove_alt_conformations(structure):
                     atom.set_occupancy(1.0)
     return structure
 
-def load_pdb(pdb_id, reference_pdb_dir="./reference_pdbs/"):
+def load_pdb(pdb_id, reference_pdb_dir="./misc/"):
     pdb_fn = os.path.join(reference_pdb_dir, f"{pdb_id}.pdb")
     if pdb_id != "1QY3":
         urllib.request.urlretrieve(f"http://files.rcsb.org/download/{pdb_id}.pdb", pdb_fn)
     else:
         # If 1QY3, use modified pdb file with reversion of R96A mutation.
-        pdb_fn = "../reference_pdbs/1QY3_A96R.pdb"
+        pdb_fn = "../misc/1QY3_A96R.pdb"
     parser = PDBParser()
     return parser.get_structure(pdb_id, pdb_fn)
 

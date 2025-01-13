@@ -5,25 +5,24 @@ import argparse
 def main(test_cases_file, summary_by_case_file, summary_by_group_file):
     # Load the input files
     test_cases = pd.read_csv(test_cases_file)
-    test_cases['idx'] = [i+1 for i in range(len(test_cases))]     
-    group_by_idx = {row[1]["idx"]:row[1]['group'] for row in
-            test_cases.iterrows()}
+    test_cases['idx'] = [i + 1 for i in range(len(test_cases))]
+    group_by_idx = {row[1]["idx"]: row[1]['group'] for row in test_cases.iterrows()}
+    
     summary_by_case = pd.read_csv(summary_by_case_file)
-    summary_by_case['group'] = [group_by_idx[int(row[1]['Problem'].split("_")[0])]
-            for row in summary_by_case.iterrows()]
+    summary_by_case['group'] = [group_by_idx[int(row[1]['Problem'].split("_")[0])] for row in summary_by_case.iterrows()]
 
     # Group by the "group" column and calculate the required statistics
     summary_by_group = summary_by_case.groupby('group').agg(
         Number_Solved=('Num_Solutions', lambda x: (x > 0).sum()),
         Mean_Num_Solutions=('Num_Solutions', 'mean'),
         Mean_Novelty=('Novelty', 'mean'),
-        Mean_Success_rate=('Success_rate', 'mean')
+        Mean_Success_rate=('Success_Rate', 'mean')
     ).reset_index()
 
     # Rename columns to match the specified format
     summary_by_group.rename(columns={'group': 'Group'}, inplace=True)
 
-    # Add summary column with that incorporates information across groups
+    # Add summary row incorporating information across groups
     summary_by_group.loc[len(summary_by_group)] = {
         "Group": "overall",
         "Number_Solved": np.sum(summary_by_group["Number_Solved"]),
@@ -32,9 +31,15 @@ def main(test_cases_file, summary_by_case_file, summary_by_group_file):
         "Mean_Success_rate": np.mean(summary_by_group["Mean_Success_rate"]),
     }
 
-    # Save the output to a new CSV file
-    summary_by_group.to_csv(summary_by_group_file, float_format='%.2f', index=False)
+    # Compute the overall_score for all cases
+    alpha = 5
+    summary_by_case['overall_score'] = (100 + alpha) * summary_by_case['Num_Solutions'] / (summary_by_case['Num_Solutions'] + alpha)
+    overall_score = summary_by_case['overall_score'].mean()
 
+    # Save the output to a new CSV file
+    with open(summary_by_group_file, 'w') as f:
+        summary_by_group.to_csv(f, float_format='%.2f', index=False)
+        f.write(f"\nMotifBench score: {overall_score:.2f}\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process test_cases and summary_by_case files to generate group-level statistics.")
@@ -44,5 +49,5 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    main(args.test_cases_file, args.summary_by_case_file,
-            args.summary_by_group_file)
+    main(args.test_cases_file, args.summary_by_case_file, args.summary_by_group_file)
+

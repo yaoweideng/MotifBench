@@ -12,10 +12,10 @@ source $config_fn
 
 # Path to evaluation directory
 summary_by_case_fn=$base_output_dir/summary_by_problem.csv
-summary_by_group_fn=$base_output_dir/summary_by_group.csv
+overall_summary_fn=$base_output_dir/overall_summary.csv
 
 # Initialize csv file for results by case with header
-echo "Problem,Num_Solutions,Novelty,Success_rate" > "$summary_by_case_fn"
+echo "Problem,Num_Solutions,Novelty,Success_Rate,Num_Evaluated" > "$summary_by_case_fn"
 
 # Loop through each summary file path in the input file
 ls $base_output_dir/*/esm_summary.txt | while IFS= read -r summary_file; do
@@ -25,9 +25,10 @@ ls $base_output_dir/*/esm_summary.txt | while IFS= read -r summary_file; do
     num_solutions=$(grep -oP 'Number of Unique Solutions\s*\(.*\)\s*\|\s*\K\d+' "$summary_file")
     novelty=$(grep -oP 'Novelty.*\|\s*\K[\d.]+' "$summary_file")
     success_rate=$(grep -oP 'Success Rate\s*\|\s*\K[\d.]+(?=%)' "$summary_file")
+    num_scaffolds_evaluated=$(grep -oP 'Number of Scaffolds Evaluated\s*\|\s*\K\d+' "$summary_file")
 
     # Append the extracted information to the output CSV
-    echo "$protein,$num_solutions,$novelty,$success_rate" >> $summary_by_case_fn
+    echo "$protein,$num_solutions,$novelty,$success_rate,$num_scaffolds_evaluated" >> $summary_by_case_fn
   else
     echo "Warning: File $summary_file not found. Skipping..."
   fi
@@ -35,5 +36,5 @@ done
 echo "Summary results by case written to " $summary_by_case_fn
 
 test_cases_fn=$benchmark_dir/test_cases.csv
-$python_path $benchmark_dir/scripts/write_summary_by_group.py $test_cases_fn $summary_by_case_fn $summary_by_group_fn
-echo "Summary results by gorup written to " $summary_by_group_fn
+$python_path $benchmark_dir/scripts/write_overall_summary.py $test_cases_fn $summary_by_case_fn $overall_summary_fn
+echo "Summary results by group written to " $overall_summary_fn
