@@ -1,8 +1,10 @@
 # MotifBench V1.0
+[!image](assets/logo.svg)
 MotifBench is a standardized protein design benchmark for motif-scaffolding problems.
 The motif-scaffolding problem is a central task in computational protein design:
 Given the coordinates of atoms in a geometry chosen to confer a desired biochemical function (a motif), the goal is to identify diverse protein structures (scaffolds) that include the motif and stabilize its geometry.
 
+[!image](assets/overview.png)
 MotifBench is introduced in a [whitepaper](PAPER_LINK_WHEN_READY).
 In this companion repository we provide:
 * [A collection of motif test cases](#test-cases)
@@ -50,24 +52,24 @@ For each benchmark problem, create a directory with 100 designed scaffolds as PD
 The organize the scaffold and metadata files as below:
 ```bash
 scaffolds/
-|-- {test_case_1}/
-|    scaffold_info.csv
-|    {test_case_1}_0.pdb
-|    {test_case_1}_1.pdb
-|    ...
-|    {test_case_1}_99.pdb
+|--{test_case_1}
+|  |--scaffold_info.csv
+|  |--{test_case_1}_1.pdb
+|  |--{test_case_1}_2.pdb
+|  |--...
+|  |--{test_case_1}_100.pdb
 |
-|-- {test_case_2}/
-|    scaffold_info.csv
-|    {test_case_2}_0.pdb
-|    {test_case_2}_1.pdb
-|    ...
-|    {test_case_2}_99.pdb
+|--{test_case_2}
+|  |--scaffold_info.csv
+|  |--{test_case_2}_1.pdb
+|  |--{test_case_2}_2.pdb
+|  |--...
+|  |--{test_case_2}_100.pdb
 |
 | ....
 |
-|-- test_case_30/
-|  ...
+|--{test_case_30}
+|  |--...
 ```
 Find an example obeying these conventions in `scaffolds.zip` at [zenodo.org/records/14396944](https://zenodo.org/records/14396944).
 
