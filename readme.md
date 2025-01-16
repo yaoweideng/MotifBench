@@ -1,5 +1,7 @@
 # MotifBench V1.0
+<div align=center>
 ![image](assets/logo.png)
+</div>    
 MotifBench is a standardized protein design benchmark for motif-scaffolding problems.
 The motif-scaffolding problem is a central task in computational protein design:
 Given the coordinates of atoms in a geometry chosen to confer a desired biochemical function (a motif), the goal is to identify diverse protein structures (scaffolds) that include the motif and stabilize its geometry.
