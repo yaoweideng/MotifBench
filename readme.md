@@ -54,24 +54,25 @@ For each benchmark problem, create a directory with 100 designed scaffolds as PD
 The organize the scaffold and metadata files as below:
 ```bash
 scaffolds/
-|--{test_case_1}
-|  |--scaffold_info.csv
-|  |--{test_case_1}_1.pdb
-|  |--{test_case_1}_2.pdb
-|  |--...
-|  |--{test_case_1}_100.pdb
-|
-|--{test_case_2}
-|  |--scaffold_info.csv
-|  |--{test_case_2}_1.pdb
-|  |--{test_case_2}_2.pdb
-|  |--...
-|  |--{test_case_2}_100.pdb
-|
-| ....
-|
-|--{test_case_30}
-|  |--...
+├── {case_1} # Name of tested case, e.g. "01_1LDB"
+│   ├── scaffold_info.csv # File storing motif placements for each scaffold, see example for more details
+│   ├── {case_1}_1.pdb
+│   ├── {case_1}_2.pdb
+│   ├── ......
+│   └── {case_1}_100.pdb
+├── {case_2}
+│   ├── scaffold_info.csv
+│   ├── {case_2}_1.pdb
+│   ├── {case_2}_2.pdb
+│   ├── ......
+│   └── {case_2}_100.pdb
+├── ......
+└── {case_30} # 30 case in total for MotifBench V1.0
+    ├── scaffold_info.csv
+    ├── {case_30}_1.pdb
+    ├── {case_30}_2.pdb
+    ├── ......
+    └── {case_30}_100.pdb
 ```
 Find an example obeying these conventions in `scaffolds.zip` at [zenodo.org/records/14396944](https://zenodo.org/records/14396944).
 
