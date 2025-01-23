@@ -14,7 +14,7 @@ For the problems with one segment we chose the contig to place no limits on the 
 For the remaining problems we chose contigs that specified order of segments in the reference structure and included gaps between segments of at least 10 residues that spanned the gap in the reference structure between the associated segments.
 
 ### 2. Running RFdiffusion motif-scaffolding via apptainer and docker image
-* We installed RFdiffusion using the docker image (see [readme](https://github.com/RosettaCommons/RFdiffusion?tab=readme-ov-file#docker)).
+* We installed RFdiffusion using the docker image (see [readme](https://github.com/RosettaCommons/RFdiffusion?tab=readme-ov-file#docker), accessed November 2024).
 * We used generated SLURM scripts for each benchmark problem using [write_scripts_by_case.sh](./write_scripts_by_case.sh).  The script includes details of the exact RFdiffusion run commands.
 * We ran these on a university compute cluster, [Sherlock](www.sherlock.stanford.edu).  Each script ran on a single GPU, of which the model varied.  The mean runtime across test cases to generate 100 scaffolds was 62 minutes.  Per-problem runtimes are reported in [runtime_by_problem.txt](./runtime_by_problem.txt).
 
