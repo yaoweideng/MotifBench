@@ -27,6 +27,12 @@ def create_parser():
         type=str,
         help='Input protein folder'
     )
+    parser.add_argument(
+        '-o',
+        '--output',
+        type=str,
+        help='Output folder for storing length validity information'
+    )
     return parser
 
 
@@ -110,8 +116,10 @@ PDB_TO_OVERALL_LENGTH = {
 
 
 def length_check(
-    input_folder: Union[str, Path]
+    input_folder: Union[str, Path],
+    warning_list: List[str]
 ):
+    invalid_count = 0
 
     for pdb_file in os.listdir(input_folder):
         if ".pdb" not in pdb_file:
@@ -142,9 +150,29 @@ def length_check(
         )
 
         if int(protein_length) not in PDB_TO_OVERALL_LENGTH[backbone_name]:
-            logging.warning(f"The name is not valid. The overall length of designed {backbone_name} should be {PDB_TO_OVERALL_LENGTH[backbone_name]}.")
+            warning_msg = (f"The scaffold length of {pdb_file} ({int(protein_length)} residues) is not valid. "
+                f"The overall length of designed {backbone_name} should be {PDB_TO_OVERALL_LENGTH[backbone_name]}.")
+            warning_list.append(warning_msg)
+            invalid_count += 1
         else:
             logging.info(f"Passed Length check for {pdb_file}.")
+        
+    return invalid_count
+
+
+def write_warnings_to_file(
+    input_folder: Union[str, Path], 
+    warning_info: List[str], 
+    output_path: Union[str, Path],
+    invalid_count: int):
+    with open(os.path.join(os.path.abspath(output_path), "length_validity.txt"), "w") as f:
+        f.write("-------------Length Validity-------------\n\n")
+        f.write(f"Length check for {input_folder}:\n")
+        for warning in warning_info:
+            f.write(f"{warning}\n")
+        f.write(f"\nDetected {invalid_count} PDB files with invalid scaffold length.\n")
+        if len(warning_messages) == 0:
+            f.write(f"Scaffold lengths are all valid in {input_folder}!")
     
 
 if __name__ == "__main__":
@@ -152,14 +180,27 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     pdb_files = [f for f in os.listdir(args.input) if f.endswith(".pdb")]
+    warning_messages = []
+    total_invalid_count = 0
+
     if not pdb_files:
         logging.info(f"Checking whole benchmark set...")
         case_folders = [case for case in os.listdir(args.input) if os.path.isdir(os.path.join(args.input, case))]
         for folder in case_folders:
-            length_check(os.path.join(args.input, folder))
+            invalid_count_per_case = length_check(
+                input_folder=os.path.join(args.input, folder), 
+                warning_list=warning_messages
+                )
+            total_invalid_count += invalid_count_per_case
+
+        write_warnings_to_file(args.input, warning_messages, args.output, total_invalid_count)
         logging.info(f"Finished processing all directories in {args.input}.")
     else:
         logging.info(f"Checking case {args.input}...")
-        length_check(os.path.abspath(args.input))
+        invalid_count_per_case = length_check(
+            input_folder=os.path.abspath(args.input), 
+            warning_list=warning_messages)
+        total_invalid_count += invalid_count_per_case
+        write_warnings_to_file(args.output, warning_messages, args.output, total_invalid_count)
         logging.info(f"Finished checking all PDB files in {args.input}.")
 
