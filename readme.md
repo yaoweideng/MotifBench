@@ -1,4 +1,4 @@
-# MotifBench V1.0
+# MotifBench V0
 <p align="center">
   <img src="assets/logo.png" alt="MotifBench Logo">
 </p>  
@@ -158,16 +158,21 @@ Group  Number_Solved  Mean_Num_Solutions  Mean_Novelty  Mean_Success_rate
 ```
 
 
-# Leaderboard
-## TODO: create leaderboard and add in RFDiffusion results.
+# MofifBench V0 Leaderboard
+
+
+| Entry Name     | MotifBench Score | Date (month/year)   | Contact Name | Contact Email               | Reported compute time         | Result files                                | Further details link |
+| -------------- | ---------------- | ------------------- | ------------ | --------------------------- | ---------------------         | --------------------                        | -------------------- |
+| RFdiffusion    | 28.60            | 02/2025             | Brian Trippe | btrippe@stanford.edu        | 31 GPU hours (various models) | [link](https://zenodo.org/records/14731790) | [link](https://github.com/blt2114/MotifBench/tree/main/example#readme) |
+
 
 ### Instructions for having your results added to the leaderboard
 Results of motif-scaffolding methods will be shared on the github repository upon request.
-To have the results of your method posted, write to [btrippe@stanford.edu](mailto:btrippe@stanford.edu) or post an issue to the github and include:
+To have the results of your method posted, post an issue to the github and include:
  1. Your success rate summary produced by `./scripts/collect_summaries.sh`
  1. A __permanent__ download link including (1) your submitted scaffold set, (2) the full evaluation results, and (3) summary results as produced by `./scripts/summarize_results.sh`.  We recommend using [Zenodo](https://zenodo.org/) or [Open Science Framework](https://osf.io/) for saving these results.
- 1. A description of the how the scaffolds were generated.  This could be a link to an arXiv paper or github repository, or an explanation of how an existing approach (e.g. with what default or non-default settings).}
- 1. A description of the compute resources used to generating backbones (e.g. "about 50 GPU hours across a variety of node types on a university cluster") }
+ 1. A description of the how the scaffolds were generated.  This could be a link to an arXiv paper or github repository, or an explanation of how an existing approach (e.g. with what default or non-default settings).
+ 1. A description of the compute resources used to generating backbones (e.g. "about 50 GPU hours across a variety of node types on a university cluster")
  1. A contact name and email address to be posted with your results.
 We will do our best to update this page with your results within a week.
 
