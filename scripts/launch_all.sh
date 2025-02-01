@@ -9,12 +9,16 @@ source "$config_path"
 
 # Ensure necessary variables are set in the config file
 if [ -z "$scaffold_base_dir" ] || [ -z "$foldseek_db_path" ] || [ -z \
-    "$base_output_dir" ] || [ -z "$benchmark_dir" ] ; then
+    "$base_output_dir" ] || [ -z "$benchmark_dir" ] || [ -z "$python_path" ] ; then
     echo "Error: Configuration file is missing necessary settings."
     echo "Ensure it includes 'scaffold_base_dir', 'foldseek_db_path', \
-        'base_output_dir', and 'benchmark_dir'."
+        'base_output_dir', 'python_path' and 'benchmark_dir'."
     exit 1
 fi
+
+# Check validity of scaffold lengths
+$python_path $benchmark_dir/scripts/length_check.py -i $scaffold_base_dir -o $scaffold_base_dir
+
 log_dir=$base_output_dir/logs/
 mkdir -p $log_dir
 ls $scaffold_base_dir | grep -E '^[0-9]{2}_.{4}$' | while read motif_name; do
