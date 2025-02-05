@@ -1,6 +1,6 @@
 # Example scaffold details
 
-As an example for demonstrating evaluation with MotifBench and to stand as a baseline for evaluation of novel motif-scaffolding methods we have designed scaffolds each benchmark problem with [RosettaFold Diffusion](https://github.com/RosettaCommons/RFdiffusion) and uploaded these scaffolds to [Zenodo](https://zenodo.org/) at [zenodo.org/records/14396944](https://zenodo.org/records/14396944).
+As an example for demonstrating evaluation with MotifBench and to stand as a baseline for evaluation of novel motif-scaffolding methods we have designed scaffolds each benchmark problem with [RosettaFold Diffusion](https://github.com/RosettaCommons/RFdiffusion) and uploaded these scaffolds to [Zenodo](https://zenodo.org/) at [zenodo.org/records/14731790](https://zenodo.org/records/14731790).
 
 The below provides details and scripts about how this scaffold set was generated.
 
