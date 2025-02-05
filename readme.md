@@ -39,7 +39,7 @@ In these files:
 # Evaluation
 
 Evaluating the benchmark requires several steps, described below.
-We provide examples of compatible inputs, example evaluation outputs, and result summaries for download from [Zenodo](https://zenodo.org/) at [zenodo.org/records/14396944](https://zenodo.org/records/14396944).
+We provide examples of compatible inputs, example evaluation outputs, and result summaries for download from [Zenodo](https://zenodo.org/) at [zenodo.org/records/14731790](https://zenodo.org/records/14731790).
 This demonstration uses scaffolds generated with [RosettaFold Diffusion](https://github.com/RosettaCommons/RFdiffusion);
 we provide details and scripts used to create this example [here](./example/readme.md) for replicablility.
 
@@ -74,7 +74,7 @@ scaffolds/
     ├── ......
     └── {case_30}_100.pdb
 ```
-Find an example obeying these conventions in `scaffolds.zip` at [zenodo.org/records/14396944](https://zenodo.org/records/14396944).
+Find an example obeying these conventions in `scaffolds.zip` at [zenodo.org/records/14731790](https://zenodo.org/records/14731790).
 
 ### Install required packages and Foldseek database
 To evaluation benchmark peformance on scaffolds assembled as described above, first download the repo and install necessary requirements.
