@@ -16,8 +16,8 @@ In this companion repository we provide:
 
 # Test-Cases
 
-The benchmark includes 30 test problems that are specified in `./test_cases.csv`, and through the pdb files in `./motif_pdbs/`.
-In this csv, each row defines a test case, The following columns characterize the problems:
+MotifBench V0 includes 30 test problems that are specified in `./test_cases.csv`, and through the pdb files in `./motif_pdbs/`.
+In this csv, each row defines a test case, with the following columns characterize the problems:
 * `pdb_id` The Protein Data Bank identifier of the experimentally characterized structure from which the motif extracted.
 * `motif_residues` The chain ID and indices of residues that comprise the motif.  Discontiguous residue ranges are separated by semicolons.
 * `redesign_idcs` The indices of residues within motif segments for which the amino acid type is not constrained to match its identity in the reference protein, and will be "redesigned" during inverse-folding.  This column is included because in cases where side-chain atoms are not involved in protein function, the motif-scaffolding problem may be made easier by allowing alternative amino acid types to be chosen for these positions during fixed-backbone sequence design.
@@ -25,14 +25,14 @@ In this csv, each row defines a test case, The following columns characterize th
 * `group` The problem group into which the motif is assigned.  This grouping is defined based on the number of contiguous segments that comprise the motif: group 1 motifs have only one segment, group 2 motifs have 2 segments, and group 3 motifs have 3 or more segments.
 
 ### Motif pdb files in `./motif_pdbs/`
-We provide a pdb for each benchmark problems in [./motif_pdbs/](./motif_pdbs/) for use as input to motif scaffolding methods.
+We provide a PDB file for each benchmark problems in [./motif_pdbs/](./motif_pdbs/) for use as input to motif scaffolding methods.
 These files have been constructed programmatically using `./scripts/download_and_format_motifs.py`, which reads the motif problem specifications in [./test_cases.csv](./test_cases.csv), downloads associated experimental structures from [rcsb.org](https://www.rcsb.org/), and parses out data for each motif.
 In these files:
 * Each segment of the motif is labeled as its own chain (i.e. A, B, C, etc).
 * For residues for which the amino acid type may be redesigned, all atoms other than N, CA, C, and O are removed and the residue type is set to unknown (`UNK`).  For residues for which the amino acid type may not be redesigned, side-chain heavy atoms.
-* For convenience, metadata about each problem is also specified in the header of each motif pdb fie.  It includes:
+* For convenience, metadata about each problem is also specified in the header of each motif pdb fie. It includes:
   *  `Reference PDB ID.` This is the idenitifier associated with the experimental structure from which the motif extracted.
-  *  `Motif Segment Placement in Reference PDB.` This field may provide guidance for methods that require motif placement within designed scaffolds to be specified. However this aspect of a solution may also be chosen (even dynamically) in a problem-specific manner.  For example, for problem 27 (4XOJ) this field is `38;A;43;B;90;C;46`. This obtains because 4XOJ has 223 resolved residues (indexed as 16 through 238), the 38 corresponds to the 38 residues (16-54) before residue 55 (segment A), the 43 corresponds to the residues between residue 55 and 99 and so on. The final 46 indicates that the native structure terminates with 46 additional residues that are not part of the motif.
+  *  `Motif Segment Placement in Reference PDB.` This field may provide guidance for methods that require motif placement within designed scaffolds to be specified. However this aspect of a solution may also be chosen (even dynamically) in a problem-specific manner. For example, for problem 27 (4XOJ) this field is `38;A;43;B;90;C;46`. This obtains because 4XOJ has 223 resolved residues (indexed as 16 through 238), the 38 corresponds to the 38 residues (16-54) before residue 55 (segment A), the 43 corresponds to the residues between residue 55 and 99 and so on. The final 46 indicates that the native structure terminates with 46 additional residues that are not part of the motif.
   * `Length for Designed Scaffolds.` This again is copied from the `test_cases.csv` specification that dictates the required length of scaffolds.
 
 
