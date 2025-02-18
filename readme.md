@@ -1,4 +1,3 @@
-# MotifBench V0
 <p align="center">
   <img src="assets/logo.png" alt="MotifBench Logo">
 </p>  
@@ -14,9 +13,14 @@ In this companion repository we provide:
 * [A performance leaderboard (with submission instructions)](#leaderboard)
 * [Acknowledgements](#acknowledgement)
 
+:rotating_light: **Solicitation of comments and input by March 31, 2025.** This repo comprises a first benchmark instantiation (“MotifBench V0”).  If you have found your way here and are interested in using or developing motif-scaffolding methods, please consider providing feedback by posting an issue or writing directly to [btrippe@stanford.edu](btrippe@stanford.edu) to help us improve MotifBench.  Of particular interest are:
+* Additional motifs to include as test cases.  Sharing a problem you think is important could help direct community effort towards unsolved problems.
+* Suggestions on how to improve the metrics and evaluation pipeline.
+We hope to incorporate suggestions into a more permanent, updated benchmark (MotifBench V1) to be released in April.
+
 # Test-Cases
 
-MotifBench V0 includes 30 test problems that are specified in `./test_cases.csv`, and through the pdb files in `./motif_pdbs/`.
+MotifBench includes 30 test problems that are specified in `./test_cases.csv`, and through the pdb files in `./motif_pdbs/`.
 In this csv, each row defines a test case, with the following columns characterize the problems:
 * `pdb_id` The Protein Data Bank identifier of the experimentally characterized structure from which the motif extracted.
 * `motif_residues` The chain ID and indices of residues that comprise the motif.  Discontiguous residue ranges are separated by semicolons.
@@ -56,23 +60,23 @@ The organize the scaffold and metadata files as below:
 scaffolds/
 ├── {case_1} # Name of tested case, e.g. "01_1LDB"
 │   ├── scaffold_info.csv # File storing motif placements for each scaffold, see example for more details
+│   ├── {case_1}_0.pdb
 │   ├── {case_1}_1.pdb
-│   ├── {case_1}_2.pdb
 │   ├── ......
-│   └── {case_1}_100.pdb
+│   └── {case_1}_99.pdb
 ├── {case_2}
 │   ├── scaffold_info.csv
+│   ├── {case_2}_0.pdb
 │   ├── {case_2}_1.pdb
-│   ├── {case_2}_2.pdb
 │   ├── ......
-│   └── {case_2}_100.pdb
+│   └── {case_2}_99.pdb
 ├── ......
 └── {case_30} # 30 case in total for MotifBench V1.0
     ├── scaffold_info.csv
+    ├── {case_30}_0.pdb
     ├── {case_30}_1.pdb
-    ├── {case_30}_2.pdb
     ├── ......
-    └── {case_30}_100.pdb
+    └── {case_30}_99.pdb
 ```
 Find an example obeying these conventions in `scaffolds.zip` at [zenodo.org/records/14731790](https://zenodo.org/records/14731790).
 
@@ -80,10 +84,10 @@ Find an example obeying these conventions in `scaffolds.zip` at [zenodo.org/reco
 To evaluation benchmark peformance on scaffolds assembled as described above, first download the repo and install necessary requirements.
 ```
 # Clone the benchmark repo and install 
-git clone git@github.com:blt2114/motif_scaffolding_benchmark.git
-cd motif_scaffolding_benchmark
+git clone git@github.com:blt2114/MotifBench.git
+cd MotifBench
 
-# Create and activate environment
+# Create and activate environment (this step can take a while)
 conda env create -f motif_bench.yml
 conda activate motif_bench
 ```
@@ -116,7 +120,7 @@ python_path=</path/to/conda/env/python> # Location of python executable
 As a demonstration you can download and run the benchmark evaluation of RFdiffusion scaffolds by downloading our example case:
 ```
 # In the benchmark repository directory, download example scaffolds from zenodo
-wget https://zenodo.org/records/14396944/files/scaffolds.zip
+wget https://zenodo.org/records/14731790/files/scaffolds.zip
 unzip scaffolds.zip
 
 # Write paths to config.txt
@@ -143,23 +147,13 @@ Finally, compile results as:
 ```
 ./scripts/summarize_results.sh config.txt
 ```
-Summary results are written to the <base_output_dir> specified in your config file both by problem (`summary_by_problem.csv`) and by group (`summary_by_group.csv`).
-Example summary files are provided on Zenodo.
-
-For example, for the RFdiffusion example, we can view results by group as:
-```
-> wget https://zenodo.org/records/14396944/files/evaluation_summaries.zip
-> unzip evaluation_summaries.zip
-> cat evaluation_summaries/summary_by_group.csv | column -s, -t 
-Group  Number_Solved  Mean_Num_Solutions  Mean_Novelty  Mean_Success_rate
-1      6              11.40               0.19          27.30
-2      6              0.80                0.20          19.90
-3      1              0.40                0.07          2.00
-```
+Summary results are written to the <base_output_dir> specified in your config file.  This includes summaries by problem (`summary_by_problem.csv`) and an overall summary (`overall_summary.csv`).
+Example summary files by problem are included on [zenodo](https://zenodo.org/records/14731790).
 
 
-# MofifBench V0 Leaderboard
+# Leaderboard
 
+### The MofifBench V0 Leaderboard
 
 | Entry Name     | MotifBench Score | Date (month/year)   | Contact Name | Contact Email               | Reported compute time         | Result files                                | Further details link |
 | -------------- | ---------------- | ------------------- | ------------ | --------------------------- | ---------------------         | --------------------                        | -------------------- |
