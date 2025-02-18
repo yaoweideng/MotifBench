@@ -49,7 +49,7 @@ $python_path $benchmark_dir/scripts/write_motifInfo_from_scaffoldInfo.py \
     $bb_dir/scaffold_info.csv $motif_pdb_path $bb_dir/motif_info.csv
 
 # Run Scaffold-Lab for evaluation
-$python_path $benchmark_dir/Scaffold-Lab/scaffold_lab/motif_scaffolding/motif_refolding.py \
+$python_path $benchmark_dir/Scaffold-Lab/motif_refolding.py \
     inference.motif_csv_path=$bb_dir/motif_info.csv \
     inference.backbone_pdb_dir=$bb_dir \
     inference.motif_pdb=$motif_pdb_path \
