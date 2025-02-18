@@ -1,9 +1,0 @@
-.*
-*~
-reference_pdb_baseline/eval_results/*
-!reference_pdb_baseline/eval_results/*/summary.txt
-genie_scripts_for_Kieren*
-*.zip
-2024_09_17_genie_test*
-*tmp*
-*egg-info*

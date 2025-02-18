@@ -20,3 +20,7 @@ For the remaining problems we chose contigs that specified order of segments in 
 
 ### 3. Assembly of `scaffold_info.csv` for each benchmark problem.
 Finally we generated the `scaffold_info.csv` metadata files for each problem with [write_all_scaffold_info_csvs.sh](./write_all_scaffold_info_csvs.sh).
+
+
+# Reference PDB evaluation results
+We additional provide intermediate computations and results of the evaluation of reference scaffolds from which motifs are defined in [reference_pdb_baseline/](./reference_pdb_baseline/).
