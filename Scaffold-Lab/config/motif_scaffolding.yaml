@@ -1,0 +1,52 @@
+# Configuration for running self-consitency evaluation on motif-scaffolding task by running ProteinMPNN and ESMFold.
+defaults:
+  - override hydra/launcher: joblib
+
+inference:
+  name: motif-scaffolding
+  gpu_id: 0  # CUDA GPU to use
+  seed: 2
+
+  # Directory of software, weights, and outputs.
+  backbone_pdb_dir: ./demo/motif_scaffolding/2KL8/
+  pmpnn_dir: ./tools/ProteinMPNN/
+  output_dir: ./outputs/2KL8/
+  motif_csv_path: ./demo/motif_scaffolding/motif_info.csv
+  motif_pdb: ./demo/motif_scaffolding/native_motifs/2KL8_motif.pdb
+  benchmark_set: None
+  
+  # Setting of ProteinMPNN
+  CA_only: False
+  hide_GPU_from_pmpnn: True
+  force_motif_AA_type: False
+
+  samples:
+    # Max backbones to evaluate and incorporate into results
+    max_backbones: 100
+
+    # Number of ProteinMPNN sequences sampled per backbone.
+    seq_per_sample: 8
+    mpnn_batch_size: 8
+    sort_by_score: False
+
+  predict_method: [ESMFold]
+
+  af2:
+    executive_colabfold_path: path_to_your_localcolabfold
+    recycle: 3
+    seed: 33
+    model_type: alphafold2_ptm # {auto, alphafold2, alphafold2_multimer_{v1-v3}, deepfold_v1}
+    num_models: 1 # {1,2,3,4,5}
+    use_amber_relax: False
+    num_relax: 3
+    use_gpu_relax: False
+    rank: ptm # {auto, plddt, ptm, iptm, multimer}
+    remove_raw_outputs: True
+
+evaluation:
+  assist_protein: ./tools/assistant_protein/assist_protein.pdb
+  foldseek_path: None
+  foldseek_database: ???
+  foldseek_cores_for_pdbTM: 8
+  tmscore_threshold: 0.6 # `tmscore-threshold` parameter for Foldseek-Cluster
+  visualize: True
