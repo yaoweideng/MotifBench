@@ -6,7 +6,7 @@ The motif-scaffolding problem is a central task in computational protein design:
 Given the coordinates of atoms in a geometry chosen to confer a desired biochemical function (a motif), the goal is to identify diverse protein structures (scaffolds) that include the motif and stabilize its geometry.
 
 ![image](assets/overview.png)
-MotifBench is introduced in a [whitepaper](PAPER_LINK_WHEN_READY).
+MotifBench is introduced in a [whitepaper](https://arxiv.org/abs/2502.12479).
 In this companion repository we provide:
 * [A collection of motif test cases](#test-cases)
 * [Evaluation instructions with an example](#evaluation)
@@ -20,8 +20,11 @@ We hope to incorporate suggestions into a more permanent, updated benchmark (Mot
 
 # Test-Cases
 
-MotifBench includes 30 test problems that are specified in `./test_cases.csv`, and through the pdb files in `./motif_pdbs/`.
-In this csv, each row defines a test case, with the following columns characterize the problems:
+MotifBench includes 30 test problems.  These problems are specified in `./test_cases.csv`, through reference to experimental structures in the protein data bank.
+For convenience of input to motif-scaffolding methods, we provides pdb files that include the complete problem specifications in `./motif_pdbs/`.
+
+### Motif specifications in `./test_cases.csv`
+In this csv, each row defines a test case, with the following columns specifying the problem:
 * `pdb_id` The Protein Data Bank identifier of the experimentally characterized structure from which the motif extracted.
 * `motif_residues` The chain ID and indices of residues that comprise the motif.  Discontiguous residue ranges are separated by semicolons.
 * `redesign_idcs` The indices of residues within motif segments for which the amino acid type is not constrained to match its identity in the reference protein, and will be "redesigned" during inverse-folding.  This column is included because in cases where side-chain atoms are not involved in protein function, the motif-scaffolding problem may be made easier by allowing alternative amino acid types to be chosen for these positions during fixed-backbone sequence design.
