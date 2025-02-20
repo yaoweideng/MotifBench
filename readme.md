@@ -84,7 +84,7 @@ scaffolds/
 Find an example obeying these conventions in `scaffolds.zip` at [zenodo.org/records/14731790](https://zenodo.org/records/14731790).
 
 ### Install required packages and Foldseek database
-To evaluation benchmark peformance on scaffolds assembled as described above, first download the repo and install necessary requirements.
+To evaluation benchmark performance on scaffolds assembled as described above, first download the repo and install necessary requirements.
 ```
 # Clone the benchmark repo and install 
 git clone git@github.com:blt2114/MotifBench.git
