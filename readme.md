@@ -181,3 +181,5 @@ This repository builds heavily on several existing codebases:
 * [ESMFold](https://github.com/facebookresearch/esm) is used for protein structure prediction.
 * [Foldseek](https://github.com/steineggerlab/foldseek) is used for structural clustering and novelty evaluation.
 If you use the scripts herein in published research, please consider crediting these resources.
+
+We also thank Marvin Li for suggestions that improved the usability of the benchmark.
