@@ -50,7 +50,7 @@ $python_path $benchmark_dir/scripts/write_motifInfo_from_scaffoldInfo.py \
 
 # Check the validity of number of motif segments
 $python_path $benchmark_dir/scripts/check_segment_validity.py \
-    -i $benchmark_dir/test_cases.csv -t $bb_dir/motif_info.csv
+    --input $benchmark_dir/test_cases.csv --test $bb_dir/motif_info.csv
 
 # Run Scaffold-Lab for evaluation
 $python_path $benchmark_dir/Scaffold-Lab/motif_refolding.py \
