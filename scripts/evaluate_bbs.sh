@@ -48,6 +48,10 @@ motif_pdb_path=$benchmark_dir/motif_pdbs/$motif_name".pdb"
 $python_path $benchmark_dir/scripts/write_motifInfo_from_scaffoldInfo.py \
     $bb_dir/scaffold_info.csv $motif_pdb_path $bb_dir/motif_info.csv
 
+# Check the validity of number of motif segments
+$python_path $benchmark_dir/scripts/check_segment_validity.py \
+    -i $benchmark_dir/test_cases.csv -t $bb_dir/motif_info.csv
+
 # Run Scaffold-Lab for evaluation
 $python_path $benchmark_dir/Scaffold-Lab/motif_refolding.py \
     inference.motif_csv_path=$bb_dir/motif_info.csv \
