@@ -1,5 +1,6 @@
-name: motifbench_py39
+name: motif_bench
 channels:
+  - bioconda
   - conda-forge
   - pytorch
   - nvidia
@@ -10,6 +11,7 @@ dependencies:
   - biopython>=1.85
   - biotite=0.36
   - pandas>=2.2.3
+  - foldseek=8.ef4e960=pl5321hb365157_0
   - matplotlib<3.10
   - pymol-open-source  # PyMOL from conda-forge
   - gputil
