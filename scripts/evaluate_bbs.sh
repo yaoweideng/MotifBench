@@ -60,6 +60,3 @@ $python_path $benchmark_dir/Scaffold-Lab/motif_refolding.py \
     inference.output_dir=$output_dir \
     evaluation.foldseek_database=$foldseek_db_path \
     inference.force_motif_AA_type=True \
-
-
-
