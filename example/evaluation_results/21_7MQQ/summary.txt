@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/21_7MQQ:
-Evaluated Protein: 21_7MQQ
-Designability Fraction: 7.00%
-Diversity: 0.29
-Novelty Score: 0.405

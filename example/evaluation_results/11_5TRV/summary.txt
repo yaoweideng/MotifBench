@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/11_5TRV:
-Evaluated Protein: 11_5TRV
-Designability Fraction: 52.53%
-Diversity: 0.27
-Novelty Score: 0.31000000000000005

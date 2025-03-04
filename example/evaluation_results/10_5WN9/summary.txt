@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/10_5WN9:
-Evaluated Protein: 10_5WN9
-Designability Fraction: 6.00%
-Diversity: 0.83
-Novelty Score: 0.3145

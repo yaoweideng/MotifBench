@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/22_7S5L:
-Evaluated Protein: 22_7S5L
-Designability Fraction: 66.00%
-Diversity: 0.04
-Novelty Score: 0.29400000000000004

@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/00_1BCF:
-Evaluated Protein: 00_1BCF
-Designability Fraction: 96.87%
-Diversity: 0.01
-Novelty Score: 0.17100000000000004

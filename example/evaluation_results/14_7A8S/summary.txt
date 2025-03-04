@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/14_7A8S:
-Evaluated Protein: 14_7A8S
-Designability Fraction: 11.00%
-Diversity: 0.09
-Novelty Score: 0.404

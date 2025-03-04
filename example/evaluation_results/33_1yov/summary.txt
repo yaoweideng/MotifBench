@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/33_1yov:
-Evaluated Protein: 33_1yov
-Designability Fraction: 20.00%
-Diversity: 0.60
-Novelty Score: 0.3345

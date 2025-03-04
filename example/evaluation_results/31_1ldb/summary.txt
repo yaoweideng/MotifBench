@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/31_1ldb:
-Evaluated Protein: 31_1ldb
-Designability Fraction: 3.00%
-Diversity: 0.33
-Novelty Score: 0.32499999999999996

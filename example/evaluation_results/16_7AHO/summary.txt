@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/16_7AHO:
-Evaluated Protein: 16_7AHO
-Designability Fraction: 13.00%
-Diversity: 0.46
-Novelty Score: 0.392

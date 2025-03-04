@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/36_5ze9:
-Evaluated Protein: 36_5ze9
-Designability Fraction: 32.00%
-Diversity: 0.34
-Novelty Score: 0.35949999999999993

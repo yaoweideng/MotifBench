@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/05_1YCR:
-Evaluated Protein: 05_1YCR
-Designability Fraction: 100.00%
-Diversity: 0.05
-Novelty Score: 0.21999999999999997

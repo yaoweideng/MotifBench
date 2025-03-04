@@ -1,6 +1,0 @@
--------------------Summary-------------------
-The following are evaluation results for /home/groups/btrippe/projects/motif_scaffolding/2024_11_03_rfdiffusion_eval/20_7KWW:
-Evaluated Protein: 20_7KWW
-Designability Fraction: 45.00%
-Diversity: 0.36
-Novelty Score: 0.386
