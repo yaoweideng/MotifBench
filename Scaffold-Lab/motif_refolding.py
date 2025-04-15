@@ -824,6 +824,8 @@ class MotifEvaluator:
             
             closest_contender_path = closest_contender['backbone_path'].iloc[0]
             shutil.copy(closest_contender_path, os.path.join(closest_scaffold_dir, os.path.basename(closest_contender_path)))
+        else:
+            self._log.info(f"There will not be closest contender since no designable scaffold detected.")
 
         return complete_results, backbones, designability_count, pdb_count, closest_contender
 
@@ -1028,7 +1030,7 @@ class MotifEvaluator:
 
                 # Auxiliary metrics
                 closest_contender_path = os.path.join(self._result_dir, f'{prefix}_closest_contender')
-                if os.listdir(closest_contender_path):
+                if os.path.exists(closest_contender_path) and os.listdir(closest_contender_path):
                     pu.motif_scaffolding_pymol_write(
                         unique_designable_backbones=closest_contender_path,
                         reference_pdb=pymol_reference_pdb,
