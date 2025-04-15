@@ -811,6 +811,7 @@ def analyze_success_rate(
         closest_contender_df = closest_contender.to_frame().T
     else:
         closest_contender = None
+        closest_contender_df = None
 
 
     return merged_data, summary_data, success_count, successful_backbones, closest_contender_df
@@ -955,7 +956,7 @@ def write_summary_results(
 
 def write_auxiliary_metrics(
     stored_path: Union[str, Path],
-    auxiliary_results: Union[str, Path, pd.DataFrame],
+    auxiliary_results: Optional[Union[str, Path, pd.DataFrame]] = None,
     prefix: Optional[str] = None
 ) -> None:
 
