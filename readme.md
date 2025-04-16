@@ -13,10 +13,9 @@ In this companion repository we provide:
 * [A performance leaderboard (with submission instructions)](#leaderboard)
 * [Acknowledgements](#acknowledgement)
 
-:rotating_light: **Solicitation of comments and input by March 31, 2025.** This repo comprises a first benchmark instantiation (“MotifBench V0”).  If you have found your way here and are interested in using or developing motif-scaffolding methods, please consider providing feedback by posting an issue or writing directly to [btrippe@stanford.edu](btrippe@stanford.edu) to help us improve MotifBench.  Of particular interest are:
+**Solicitation of comments and input.** If you have found your way here and are interested in using or developing motif-scaffolding methods, please consider providing feedback by posting an issue or writing directly to [btrippe@stanford.edu](btrippe@stanford.edu) to help us improve MotifBench.  Of particular interest are:
 * Additional motifs to include as test cases.  Sharing a problem you think is important could help direct community effort towards unsolved problems.
 * Suggestions on how to improve the metrics and evaluation pipeline.
-We hope to incorporate suggestions into a more permanent, updated benchmark (MotifBench V1) to be released in April.
 
 # Test-Cases
 
