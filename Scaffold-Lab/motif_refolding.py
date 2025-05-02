@@ -548,7 +548,6 @@ class MotifRefolder:
         if 'ESMFold' in self._forward_folding:
             os.makedirs(esmf_dir, exist_ok=True)
             for i, (header, string) in enumerate(seqs_dict.items()):
-
                 # Get score for ProteinMPNN
                 if header.startswith("T=0"):
                     idx = header.split('sample=')[1].split(',')[0]
@@ -917,13 +916,14 @@ class MotifEvaluator:
                 self._log.info(f"Novelty results already exist. Continuing...")
 
             unique_backbones = results_with_novelty[results_with_novelty["sample_idx"] == 1]
-            novelty_lookup = dict(zip(unique_backbones["backbone_path"].apply(os.path.basename), unique_backbones["pdbTM"]))
+
+            novelty_lookup = {Path(bp).stem : tm for bp, tm in zip(unique_backbones["backbone_path"], unique_backbones["pdbTM"])}
 
             for cluster_id, cluster_info in clusters.items():
                 center = cluster_info["center"]
                 members = cluster_info["member"]
 
-                cluster_novelty_values = [novelty_lookup.get(member, None) for member in members]
+                cluster_novelty_values = [novelty_lookup.get(Path(member).stem, None) for member in members]
                 cluster_novelty_values = [val for val in cluster_novelty_values if val is not None]
 
                 if cluster_novelty_values:
@@ -931,7 +931,7 @@ class MotifEvaluator:
                     clusters[cluster_id]["mean_novelty"] = mean_novelty
                 else:
                     clusters[cluster_id]["mean_novelty"] = None
-
+            
             # Weighted novelty across clusters
             novelty_values = [cluster_info["mean_novelty"] for cluster_info in clusters.values()]
             weighted_novelty = sum(novelty_values) / len(novelty_values)
