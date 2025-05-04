@@ -956,7 +956,7 @@ def write_summary_results(
 
 def write_auxiliary_metrics(
     stored_path: Union[str, Path],
-    auxiliary_results: Optional[Union[str, Path, pd.DataFrame]],
+    auxiliary_results: Optional[Union[str, Path, pd.DataFrame]] = None,
     prefix: Optional[str] = None
 ) -> None:
 

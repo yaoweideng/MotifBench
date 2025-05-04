@@ -64,7 +64,7 @@ def pdbTM(
     `top_pdbTM`: The highest pdbTM value among the top three targets hit by Foldseek.
     """
     # Handling multiprocessing
-    base_tmp_path = "../tmp/"
+    base_tmp_path = "./tmp/"
     tmp_path = os.path.join(base_tmp_path, f'process_{process_id}_{uuid.uuid4().hex[:8]}')
     os.makedirs(tmp_path, exist_ok=True)
     
@@ -89,7 +89,7 @@ def pdbTM(
             cmd.replace('foldseek', {foldseek_path})
 
         _ = subprocess.run(cmd, shell=True, check=True, stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-        
+    
         result = pd.read_csv(output_file, sep='\t')
         top_pdbTM = round(result['alntmscore'].head(1).max(), 3)
         

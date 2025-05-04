@@ -23,4 +23,4 @@ Finally we generated the `scaffold_info.csv` metadata files for each problem wit
 
 
 # Reference PDB evaluation results
-We additional provide intermediate computations and results of the evaluation of reference scaffolds from which motifs are defined in [reference_pdb_baseline/](./reference_pdb_baseline/).
+We additionally provide intermediate computations and results of the evaluation of reference scaffolds from which motifs are defined in [reference_pdb_baseline/](./reference_pdb_baseline/).
