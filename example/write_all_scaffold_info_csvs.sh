@@ -15,7 +15,7 @@ if [ -z "$scaffold_base_dir" ] ; then
     exit 1
 fi
 
-ls $scaffold_base_dir | while read l; do
+ls $scaffold_base_dir | grep -E '^[0-9]{2}_.{4}$' | while read l; do
 	$python_path write_scaffold_info.py $scaffold_base_dir/$l $scaffold_base_dir/$l/scaffold_info.csv contig_specifications.csv
 done
 

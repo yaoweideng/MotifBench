@@ -77,7 +77,7 @@ def main(input_dir, output_csv, contig_file):
             sample_num = parse_pdb_name(filename)
             if sample_num is not None:
                 pdb_file = os.path.join(input_dir, filename)
-                problem_id = os.path.basename(input_dir)  # Assuming problem_id is the folder name
+                problem_id = os.path.basename(input_dir.strip("/"))  # Assuming problem_id is the folder name
                 motif_placements = extract_motif_placements(pdb_file, chain_order, problem_id)
                 rows.append([sample_num, motif_placements])
 
