@@ -2,6 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import subprocess
+import uuid
 import argparse
 import psutil
 import time
@@ -64,7 +65,7 @@ def pdbTM(
     """
     # Handling multiprocessing
     base_tmp_path = "../tmp/"
-    tmp_path = os.path.join(base_tmp_path, f'process_{process_id}')
+    tmp_path = os.path.join(base_tmp_path, f'process_{process_id}_{uuid.uuid4().hex[:8]}')
     os.makedirs(tmp_path, exist_ok=True)
     
     #pdb100 = "~/zzq/foldseek/database/pdb100/pdb"

@@ -419,8 +419,6 @@ class MotifRefolder:
             str(self._sample_conf.seq_per_sample),
             '--sampling_temp',
             '0.1',
-            '--seed',
-            '33',
             '--batch_size',
             str(self._sample_conf.mpnn_batch_size),
         ]
@@ -838,7 +836,13 @@ class MotifEvaluator:
         os.makedirs(successful_backbone_dir, exist_ok=True)
 
         for pdb in backbones:
-            shutil.copy(pdb, os.path.join(successful_backbone_dir, os.path.basename(pdb)))
+            successful_pdb_new_path = os.path.join(successful_backbone_dir, os.path.basename(pdb))
+            shutil.copy(pdb, successful_pdb_new_path)
+
+            # Replace all "UNK" with "GLY" in a file (presence of UNK crashes foldseek)
+            with open(successful_pdb_new_path, 'r') as f: content = f.read()
+            content = content.replace('UNK', 'GLY')
+            with open(successful_pdb_new_path, 'w') as f: f.write(content)
 
         diversity = du.foldseek_cluster(
             input=successful_backbone_dir,
